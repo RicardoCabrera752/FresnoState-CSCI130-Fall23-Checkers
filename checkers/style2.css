@@ -1,12 +1,17 @@
+table{
+  background-color: #000000;
+  margin-left: auto;
+  margin-right: auto;
+}
 .Red{
-    background-color: red;
+    background-color: lightsalmon;
     width:70px;
     height:70px;
 
 }
 .black
 {
-    background-color: black;
+    background-color: brown;
     width:50px;
     height:50px;
     color: blue;  
@@ -29,7 +34,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background-color: green; /* we can remove this if we have the player choose a color*/
+    background-color: white; /* we can remove this if we have the player choose a color*/
   
   }
   
@@ -93,7 +98,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background-color: yellow; /* we can remove this if we have the player choose a color*/
+  background-color: black; /* we can remove this if we have the player choose a color*/
   
 }
 
@@ -119,3 +124,33 @@
   background-color: green;
   color: white;
 }
+
+[id^='cell']{
+  position: relative;
+
+}
+
+
+[id^='cell']
+{
+  position: relative;
+
+}
+
+
+[id^='cell'].hint::after
+{
+  content: "";
+ position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+  border: solid chartreuse 5px;
+
+}
+
+

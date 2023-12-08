@@ -13,12 +13,14 @@ let oldcellnumber;
 let turn=0;
 var pc0,pc1,pc2,pc3,pc4,pc5;
 var pc6,pc7,pc8,pc9,pc10,pc11;
+var pc12,pc13,pc14;
 
-var pc12,pc13,pc14,pc15,pc16,pc17;
-var pc18,pc19,pc20,pc21,pc22,pc23;
+var pc15,pc16,pc17,pc18,pc19,pc20,pc21,pc22,pc23;
+var pc24,pc25,pc26,pc27,pc28,pc29;
 var storenemypieceId=[];
 var storenemypiececell=[];
 var player1points=12,player2points=12;
+var newAttempt=false;
 var startState=false;
 var untoggle=[];
 
@@ -26,12 +28,16 @@ var untoggle=[];
 function Start()
 {
     
-    alert('Game Started');
     startState=true;
     iniateallPieces();
     updateScore();
-    identifyTurn();
-
+    //identifyTurn();
+    let change=document.getElementById('start');
+    
+    change.classList.add("started");
+    
+    change.innerHTML="Game in Progress";
+    
 }
 
 function hintSpot(pieceId)
@@ -43,16 +49,16 @@ function hintSpot(pieceId)
     let piecePosition= blackPiecePostions[pieceId];
         for(index; index<2; index++)
         {
-            if(gameBoard[piecePosition+7]==null&&index==0)
+            if(gameBoard[piecePosition+9]==null&&index==0)
             {
-                let cell1=blackPiecePostions[pieceId]+7;
+                let cell1=blackPiecePostions[pieceId]+9;
                 let hint1=document.getElementById('cell'+cell1);
                 hint1.classList.toggle('hint');   
                 untoggle[index]=hint1;
             }
-            else if(gameBoard[piecePosition+9]==null&&index==1)
+            else if(gameBoard[piecePosition+11]==null&&index==1)
             {
-                let cell2=blackPiecePostions[pieceId]+9;
+                let cell2=blackPiecePostions[pieceId]+11;
                 let hint2=document.getElementById('cell'+cell2);
                 hint2.classList.toggle('hint');  
                 untoggle[index]=hint2;
@@ -67,38 +73,37 @@ function hintSpot(pieceId)
         let piecePosition= blackPiecePostions[pieceId];
         for(index;index<4;index++)
         {
-            if(gameBoard[piecePosition+7]!=null&&index==0)
+            if(gameBoard[piecePosition+9]!=null&&index==0)
             {
-                alert('x');
-                 if(gameBoard[piecePosition+14]==null)
+                 if(gameBoard[piecePosition+18]==null)
                 {  
-                let cell1=blackPiecePostions[pieceId]+14;
+                let cell1=blackPiecePostions[pieceId]+18;
                 let hint1=document.getElementById('cell'+cell1);
                 hint1.classList.toggle('hint');   
                 untoggle[index]=hint1;
                  }
             }
-            else if(gameBoard[piecePosition+9]!=null &&index==1)
+            else if(gameBoard[piecePosition+11]!=null &&index==1)
             {
-                if(gameBoard[piecePosition+18]==null)
+                if(gameBoard[piecePosition+22]==null)
                 {  
-                let cell2=blackPiecePostions[pieceId]+18;
+                let cell2=blackPiecePostions[pieceId]+22;
                 let hint2=document.getElementById('cell'+cell2);
                 hint2.classList.toggle('hint');   
                 untoggle[index]=hint2;
                 }
 
             }
-            else if(gameBoard[piecePosition+7]==null && index==2)
+            else if(gameBoard[piecePosition+9]==null && index==2)
             {
-                let cell3=blackPiecePostions[pieceId]+7;
+                let cell3=blackPiecePostions[pieceId]+9;
                 let hint3=document.getElementById('cell'+cell3);
                 hint3.classList.toggle('hint');   
                 untoggle[index]=hint3;
             }
-            else if(gameBoard[piecePosition+9]==null && index==3)
+            else if(gameBoard[piecePosition+11]==null && index==3)
             {
-                let cell4=blackPiecePostions[pieceId]+9;
+                let cell4=blackPiecePostions[pieceId]+11;
                 let hint4=document.getElementById('cell'+cell4);
                 hint4.classList.toggle('hint');   
                 untoggle[index]=hint4;
@@ -113,17 +118,17 @@ function hintSpot(pieceId)
         let piecePosition= redPiecePositions[pieceId];
         for(index; index<2; index++)
         {
-            if(gameBoard[piecePosition-7]==null&&index==0)
+            if(gameBoard[piecePosition-9]==null&&index==0)
             {
                 
-                let cell1=redPiecePositions[pieceId]-7;
+                let cell1=redPiecePositions[pieceId]-9;
                 let hint1=document.getElementById('cell'+cell1);
                 hint1.classList.toggle('hint');   
                 untoggle[index]=hint1;
             }
-            else if(gameBoard[piecePosition-9]==null&&index==1)
+            else if(gameBoard[piecePosition-11]==null&&index==1)
             {
-                let cell2=redPiecePositions[pieceId]-9;
+                let cell2=redPiecePositions[pieceId]-11;
                 let hint2=document.getElementById('cell'+cell2);
                 hint2.classList.toggle('hint');  
                 untoggle[index]=hint2;
@@ -139,38 +144,38 @@ function hintSpot(pieceId)
         let piecePosition= redPiecePositions[pieceId];
         for(let i=0; index<4; index++)
         {
-            if(gameBoard[piecePosition-7]!=null&&index==0)
+            if(gameBoard[piecePosition-9]!=null&&index==0)
             {
                 alert('x');
-                 if(gameBoard[piecePosition-14]==null)
+                 if(gameBoard[piecePosition-18]==null)
                 {  
-                let cell1=redPiecePositions[pieceId]-14;
+                let cell1=redPiecePositions[pieceId]-18;
                 let hint1=document.getElementById('cell'+cell1);
                 hint1.classList.toggle('hint');   
                 untoggle[index]=hint1;
                  }
             }
-            else if(gameBoard[piecePosition-9]!=null &&index==1)
+            else if(gameBoard[piecePosition-11]!=null &&index==1)
             {
-                if(gameBoard[piecePosition-18]==null)
+                if(gameBoard[piecePosition-22]==null)
                 {  
-                let cell2=redPiecePositions[pieceId]-18;
+                let cell2=redPiecePositions[pieceId]-22;
                 let hint2=document.getElementById('cell'+cell2);
                 hint2.classList.toggle('hint');   
                 untoggle[index]=hint2;
                 }
 
             }
-            else if(gameBoard[piecePosition-7]==null && index==2)
+            else if(gameBoard[piecePosition-9]==null && index==2)
             {
-                let cell3=redPiecePositions[pieceId]-7;
+                let cell3=redPiecePositions[pieceId]-9;
                 let hint3=document.getElementById('cell'+cell3);
                 hint3.classList.toggle('hint');   
                 untoggle[index]=hint3;
             }
-            else if(gameBoard[piecePosition-9]==null && index==3)
+            else if(gameBoard[piecePosition-11]==null && index==3)
             {
-                let cell4=redPiecePositions[pieceId]-9;
+                let cell4=redPiecePositions[pieceId]-11;
                 let hint4=document.getElementById('cell'+cell4);
                 hint4.classList.toggle('hint');   
                 untoggle[index]=hint4;
@@ -184,121 +189,41 @@ function hintSpot(pieceId)
 }
 
 
-function hintspotforKings(pieceId)
-{
-    
-    if(player1==true&& noEnemy==true)
-	{
-       
-        let index =0;
-        let piecePosition= blackPiecePostions[pieceId];
-        
-        
-        for(index; index<4; index++)
-        {
-            if(gameBoard[piecePosition+7]==null&&index==0)
-            {
-                let cell1=blackPiecePostions[pieceId]+7;
-                let hint1=document.getElementById('cell'+cell1);
-                hint1.classList.toggle('hint');   
-                untoggle[index]=hint1;
-            }
-            else if(gameBoard[piecePosition+9]==null&&index==1)
-            {
-                let cell2=blackPiecePostions[pieceId]+9;
-                let hint2=document.getElementById('cell'+cell2);
-                hint2.classList.toggle('hint');  
-                untoggle[index]=hint2;
-            }
-            else if(gameBoard[piecePosition-7]==null&&index==2)
-            {
-                let cell3=blackPiecePostions[pieceId]-7;
-                let hint3=document.getElementById('cell'+cell3);
-                hint3.classList.toggle('hint');  
-                untoggle[index]=hint3;
-            }
-            else if(gameBoard[piecePosition-9]==null&&index==3)
-            {
-                let cell4=blackPiecePostions[pieceId]-9;
-                let hint4=document.getElementById('cell'+cell4);
-                hint4.classList.toggle('hint');  
-                untoggle[index]=hint4;
-            }
-
-        }
- 
-    }//if there is an enemy than check behind it as well
-    else if (player1==true && noEnemy==false)
-    {
-        let index=0;
-        let piecePosition= blackPiecePostions[pieceId];
-        for(index;index<4;index++)
-        {
-            if(gameBoard[piecePosition+7]!=null&&index==0)
-            {
-              
-                 if(gameBoard[piecePosition+14]==null)
-                {  
-                let cell1=blackPiecePostions[pieceId]+14;
-                let hint1=document.getElementById('cell'+cell1);
-                hint1.classList.toggle('hint');   
-                untoggle[index]=hint1;
-                 }
-            }
-            else if(gameBoard[piecePosition+9]!=null &&index==1)
-            {
-                if(gameBoard[piecePosition+18]==null)
-                {  
-                let cell2=blackPiecePostions[pieceId]+18;
-                let hint2=document.getElementById('cell'+cell2);
-                hint2.classList.toggle('hint');   
-                untoggle[index]=hint2;
-                }
-
-            }
-            else if(gameBoard[piecePosition+7]==null && index==2)
-            {
-                let cell3=blackPiecePostions[pieceId]+7;
-                let hint3=document.getElementById('cell'+cell3);
-                hint3.classList.toggle('hint');   
-                untoggle[index]=hint3;
-            }
-            else if(gameBoard[piecePosition+9]==null && index==3)
-            {
-                let cell4=blackPiecePostions[pieceId]+9;
-                let hint4=document.getElementById('cell'+cell4);
-                hint4.classList.toggle('hint');   
-                untoggle[index]=hint4;
-            }
-        }
-
-       
-    }
 
 
-}
+
+
 function clickPiece(pieceId,cellNumber)
 {    
-    
 
-   
     
-    if(oldId==pieceId&& startState==true)// clicking the same piece
+   if(startState==true)
+   {
+    
+    if(oldId==pieceId)// clicking the same piece
     {
-        alert('same piece');
         let cell=document.getElementById(pieceId);
         cell.classList.toggle('clicked');
-        oldId=null;
-        pieceId=null;
+        //oldId=null;
+        //pieceId=null;
         clickedPiece=false;
+        newAttempt=true;
+        if(isKing[pieceId])
+        {
+            turnoffKingHints();
+        }
+        else 
+        {
+            turnoffHint();
+        }
+
 
     }
-    if(startState==true)
-    {
     
-     if(clickedPiece==false &&player1==true && document.getElementById(pieceId).innerHTML!='' &&document.getElementById(pieceId).innerHTML!='X')
+     else if(clickedPiece==false &&player1==true && document.getElementById(pieceId).innerHTML!='' &&document.getElementById(pieceId).innerHTML!='X')
     {
-       // alert('inside');
+
+        //newAttempt=false;        
         let cell=document.getElementById(pieceId);
         //the id string from the first piece we clicked during each of our turns
         oldId=pieceId;
@@ -307,7 +232,6 @@ function clickPiece(pieceId,cellNumber)
         //to indicate that the piece has been clicked on and will be the one to move
         cell.classList.toggle('clicked');
         clickedPiece=true;
-        
        //noEnemy=checkforEnemy(oldId,oldcellnumber); this does not work
        checkforEnemy(pieceId,oldcellnumber);
        if(isKing[pieceId]==true)
@@ -317,6 +241,7 @@ function clickPiece(pieceId,cellNumber)
        else{
         hintSpot(pieceId);
        }
+       
      
     }
     else if(clickedPiece==false&&player2==true && document.getElementById(pieceId).innerHTML!=''&& document.getElementById(pieceId).innerHTML!='O')
@@ -336,9 +261,11 @@ function clickPiece(pieceId,cellNumber)
        {
         hintspotforKings(pieceId);
        }
-       hintSpot(pieceId);
+       else{
+        hintSpot(pieceId);
+       }
     
-    }//we use oldid instead of pieceId, pieceId will be something else when you click on a spot to move
+    }
     else if (isKing[oldId]==true)
     {
         kingMovements(oldId,oldcellnumber,pieceId,cellNumber);
@@ -348,7 +275,7 @@ function clickPiece(pieceId,cellNumber)
          pieceId will be string of the second click*/
         movePieceto(oldId,oldcellnumber,pieceId,cellNumber,noEnemy);
 
-    }
+   }
 
 }
 
@@ -357,21 +284,26 @@ function iniateallPieces()
     pc0="pc0";pc1="pc1";pc2="pc2";pc3="pc3";
     pc4="pc4";pc5="pc5";pc6="pc6";pc7="pc7";
     pc8="pc8";pc9="pc9";pc10="pc10";pc11="pc11";
+    pc12="pc12";pc13="pc13";pc14="pc14";
     blackPiecePostions[pc0]=1;
     blackPiecePostions[pc1]=3;
     blackPiecePostions[pc2]=5;
     blackPiecePostions[pc3]=7;
-
-
-    blackPiecePostions[pc4]=8;
+    blackPiecePostions[pc4]=9;
+    
     blackPiecePostions[pc5]=10;
     blackPiecePostions[pc6]=12;
     blackPiecePostions[pc7]=14;
+    blackPiecePostions[pc8]=16;
+    blackPiecePostions[pc9]=18;
 
-    blackPiecePostions[pc8]=17;
-    blackPiecePostions[pc9]=19;
+
     blackPiecePostions[pc10]=21;
     blackPiecePostions[pc11]=23;
+    blackPiecePostions[pc12]=25;
+    blackPiecePostions[pc13]=27;
+    blackPiecePostions[pc14]=29;
+
 
     isKing[pc0]=false;
     isKing[pc1]=false;
@@ -383,45 +315,62 @@ function iniateallPieces()
     isKing[pc6]=false;
     isKing[pc7]=false;
 
-    isKing[pc8]=true;
+    isKing[pc8]=false;
     isKing[pc9]=false;
     isKing[pc10]=false;
     isKing[pc11]=false;
-    //gameboardspots are only so we can concatenate later
-    for(let i=0;i<64;i++)
-{gameBoardspots[i]=i;}
-gameBoard=[
-    null, "pc0", null, "pc1", null, "pc2", null, "pc3",
-    "pc4", null, "pc5", null, "pc6", null, "pc7", null,
-    null, "pc8", null, "pc9", null, "pc10", null, "pc11",
-    null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null,
-    "pc12", null, "pc13", null, "pc14", null, "pc15", null,
-    null, "pc16", null, "pc17", null, "pc18", null, "pc19",
-    "pc20", null, "pc21", null, "pc22", null, "pc23", null];
+    isKing[pc12]=false;
+    isKing[pc13]=false;
+    isKing[pc14]=false;
 
- pc12="pc12";pc13="pc13";pc14="pc14";pc15="pc15";
+    
+
+
+    for(let i=0;i<100;i++)
+{gameBoardspots[i]=i;}
+
+
+gameBoard=[
+    null,	"pc0",	null,	"pc1",	null,	"pc2",	null,	"pc3",	null,	"pc4",
+"pc5",	null,	"pc6",	null,	"pc7",	null,	"pc8",	null,	"pc9",	null,
+null,	"pc10",	null,	"pc11",	null,	"pc12",	null,	"pc13",	null,	"pc14",
+null,	null,	null,	null,	null,	null,	null,	null,	null,	null,
+null,	null,	null,	null,	null,	null,	null,	null,	null,	null,
+null,	null,	null,	null,	null,	null,	null,	null,	null,	null,
+null,	null,	null,	null,	null,	null,	null,	null,	null,	null,
+"pc15",	null,	"pc16",	null,	"pc17",	null,	"pc18",	null,	"pc19",	null,
+null,	"pc20",	null,	"pc21",	null,	"pc22",	null,	"pc23",	null,	"pc24",
+"pc25",	null,	"pc26",	null,	"pc27",	null,	"pc28",	null,	"pc29",	null,
+];
+
+ pc15="pc15";
 pc16="pc16";pc17="pc17";pc18="pc18";pc19="pc19";
 pc20="pc20";pc21="pc21";pc22="pc22";pc23="pc23";
- redPiecePositions[pc12]=40;
- redPiecePositions[pc13]=42;
- redPiecePositions[pc14]=44;
- redPiecePositions[pc15]=46;
+pc24="pc24";pc25="pc25";pc26="pc26";pc27="pc27";
+pc28="pc28";pc29="pc29";
 
- redPiecePositions[pc16]=49;
- redPiecePositions[pc17]=51;
- redPiecePositions[pc18]=53;
- redPiecePositions[pc19]=55;
 
- redPiecePositions[pc20]=56;
- redPiecePositions[pc21]=58;
- redPiecePositions[pc22]=60;
- redPiecePositions[pc23]=62;
- isKing[pc12]=false;
- isKing[pc13]=false;
- isKing[pc14]=false;
+
+ redPiecePositions[pc15]=70;//70
+ redPiecePositions[pc16]=72;
+ redPiecePositions[pc17]=74;
+ redPiecePositions[pc18]=76;
+ redPiecePositions[pc19]=78;
+
+
+ redPiecePositions[pc20]=80;
+ redPiecePositions[pc21]=82;
+ redPiecePositions[pc22]=84;
+ redPiecePositions[pc23]=86;
+ redPiecePositions[pc24]=88;
+
+ redPiecePositions[pc25]=90;
+ redPiecePositions[pc26]=92;
+ redPiecePositions[pc27]=94;
+ redPiecePositions[pc28]=96;
+ redPiecePositions[pc29]=98;
+ 
  isKing[pc15]=false;
-
  isKing[pc16]=false;
  isKing[pc17]=false;
  isKing[pc18]=false;
@@ -431,6 +380,15 @@ pc20="pc20";pc21="pc21";pc22="pc22";pc23="pc23";
  isKing[pc21]=false;
  isKing[pc22]=false;
  isKing[pc23]=false;
+ isKing[pc24]=false;
+ isKing[pc25]=false;
+ isKing[pc26]=false;
+ isKing[pc27]=false;
+
+ isKing[pc28]=false;
+ isKing[pc29]=false;
+
+
 
 }
 
@@ -439,15 +397,19 @@ pc20="pc20";pc21="pc21";pc22="pc22";pc23="pc23";
 function movePieceto(oldId,oldcellnumber,pieceId,cellNumber,noEnemy)
 {
 
+
+    
     let cellvalue = parseInt(cellNumber.replace(/\D/g, ""), 10);
 
     if(noEnemy==true)
     {
+        
 
   
-    if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+7&&player1==true)
+    if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
     { 
-            blackPiecePostions[oldId]+=7;
+        
+            blackPiecePostions[oldId]+=9;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
@@ -455,7 +417,7 @@ function movePieceto(oldId,oldcellnumber,pieceId,cellNumber,noEnemy)
         //document.getElementById(cellNumber).style.color = '';
         //switch the two Id's
             replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+7);
+            updategameBoard(oldId,oldcellnumber,+9);
             player1=false;
             player2=true;
             clickedPiece=false;
@@ -463,13 +425,11 @@ function movePieceto(oldId,oldcellnumber,pieceId,cellNumber,noEnemy)
             {
             makeKing(oldId);
             }
-
-            
     
     }
-    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
+    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+11&&player1==true)
     {
-        blackPiecePostions[oldId]+=9;
+        blackPiecePostions[oldId]+=11;
 
 
         //clear the O from the first spot
@@ -480,7 +440,7 @@ function movePieceto(oldId,oldcellnumber,pieceId,cellNumber,noEnemy)
         //document.getElementById(oldId).style.color = '';
         //switch the two Id's
         replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,+9);      
+        updategameBoard(oldId,oldcellnumber,+11);      
         player1=false;
         player2=true;
         clickedPiece=false;
@@ -492,9 +452,9 @@ function movePieceto(oldId,oldcellnumber,pieceId,cellNumber,noEnemy)
    
     }
     //for player 2
-    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-7&&player2==true)
+    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-9&&player2==true)
     {
-        redPiecePositions[oldId]-=7;
+        redPiecePositions[oldId]-=9;
         document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
         document.getElementById(cellNumber).innerHTML='X';
@@ -502,15 +462,15 @@ function movePieceto(oldId,oldcellnumber,pieceId,cellNumber,noEnemy)
         document.getElementById(oldId).style.color = '';
         //switch the two Id's
         replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,-7);
+        updategameBoard(oldId,oldcellnumber,-9);
         player1=true;
         player2=false;
         clickedPiece=false;
 
     }
-    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-9&&player2==true)
+    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-11&&player2==true)
     {
-        redPiecePositions[oldId]-=9;
+        redPiecePositions[oldId]-=11;
         document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
         document.getElementById(cellNumber).innerHTML='X';
@@ -518,7 +478,7 @@ function movePieceto(oldId,oldcellnumber,pieceId,cellNumber,noEnemy)
         document.getElementById(oldId).style.color = '';
         //switch the two Id's
         replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,-9);
+        updategameBoard(oldId,oldcellnumber,-11);
         player1=true;
         player2=false;
         clickedPiece=false;
@@ -532,38 +492,42 @@ hopOver(oldId,oldcellnumber,pieceId,cellNumber);
 noEnemy=true;
 
 }
-identifyTurn();
 turnoffHint();
-turnoffKingHints();
-
 }
 
 function makeKing(pieceId)
 {
     
-    if(blackPiecePostions[pieceId]==56)
+    if(blackPiecePostions[pieceId]==90)
     {
         let changePiece=document.getElementById(oldId);
         changePiece.classList.add('king');
         isKing[pieceId]=true;
     }
-    else if(blackPiecePostions[pieceId]==58)
+    else if(blackPiecePostions[pieceId]==92)
     {
         let changePiece=document.getElementById(oldId);
         changePiece.style.color='orange';
         isKing[pieceId]=true;
     }
-    else if(blackPiecePostions[pieceId]==60)
+    else if(blackPiecePostions[pieceId]==94)
     {
         let changePiece=document.getElementById(oldId);
         changePiece.style.color='orange';
         isKing[pieceId]=true;
     }
-    else if(blackPiecePostions[pieceId]==62)
+    else if(blackPiecePostions[pieceId]==96)
     {
         let changePiece=document.getElementById(oldId);
         changePiece.style.color='orange';
         isKing[pieceId]=true;
+    }
+    else if(blackPiecePostions[pieceId]==98)
+    {
+        let changePiece=document.getElementById(oldId);
+        changePiece.classList.add('king');
+        isKing[pieceId]=true;
+
     }
     else if(redPiecePositions[pieceId]==1)
     {
@@ -587,6 +551,13 @@ function makeKing(pieceId)
 
     }
     else if(redPiecePositions[pieceId]==7)
+    {
+        let changePiece=document.getElementById(oldId);
+        changePiece.classList.add('king');
+        isKing[pieceId]=true;
+
+    }
+    else if(redPiecePositions[pieceId]==9)
     {
         let changePiece=document.getElementById(oldId);
         changePiece.classList.add('king');
@@ -722,7 +693,7 @@ else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+9&&player2==true)
 else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-7&&player2==true)
 {
 
-    alert('is happening');
+    
     redPiecePositions[oldId]-=7;
     document.getElementById(oldId).innerHTML='';
     //input O into the second spot we put
@@ -759,11 +730,10 @@ else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-9&&player2==true)
 //}
 else 
 {
-    //alert('is happening');
     hopOver(oldId,oldcellnumber,pieceId,cellNumber);
     noEnemy=true;
-    
 }
+turnoffKingHints();
 }
 
 function replace(oldId,oldcellnumber,pieceId,cellNumber)
@@ -793,24 +763,20 @@ function checkforEnemy(pieceId,oldcellnumber)
     if(player1==true && isKing[pieceId]==false)
     {
     
-    for(let i=12;i<24; i++)
+    for(let i=15;i<30; i++)
     {
         //two if statements to check both positions
-        if(gameBoard[cellvalue+7] =="pc"+i)
+        if(gameBoard[cellvalue+9] =="pc"+i)
         {
-           
             noEnemy=false;
             storenemypieceId[0]="pc"+i;
-            storenemypiececell[0]=cellvalue+7;
-            
-            
-        
+            storenemypiececell[0]=cellvalue+9;
         }
-        if(gameBoard[cellvalue+9] =="pc"+i)
+        if(gameBoard[cellvalue+11] =="pc"+i)
         {
             
             storenemypieceId[1]="pc"+i;
-            storenemypiececell[1]=cellvalue+9;
+            storenemypiececell[1]=cellvalue+11;
            
             noEnemy=false;
         
@@ -818,17 +784,17 @@ function checkforEnemy(pieceId,oldcellnumber)
     }// this statement will check the four positions of the piece clicked when king
     }else if(player1==true&&isKing[pieceId]==true)
     {
-        for(let i=12;i<24; i++)
+        for(let i=15;i<30; i++)
         {
             //two if statements to check both positions
-            if(gameBoard[cellvalue+7] =="pc"+i)
+            if(gameBoard[cellvalue+9] =="pc"+i)
             {
                 noEnemy=false;
                 storenemypieceId[0]="pc"+i;
                 storenemypiececell[0]=cellvalue+7;
             
             }
-            if(gameBoard[cellvalue+9] =="pc"+i)
+            if(gameBoard[cellvalue+11] =="pc"+i)
             {
                noEnemy=false;
                 storenemypieceId[1]="pc"+i;
@@ -836,14 +802,14 @@ function checkforEnemy(pieceId,oldcellnumber)
             
             
             } 
-            if(gameBoard[cellvalue-7] =="pc"+i)
+            if(gameBoard[cellvalue-9] =="pc"+i)
             {
                 noEnemy=false;
                 storenemypieceId[2]="pc"+i;
                 storenemypiececell[2]=cellvalue-7;
 
             }
-            if(gameBoard[cellvalue-9] =="pc"+i)
+            if(gameBoard[cellvalue-11] =="pc"+i)
             {
                 noEnemy=false;
                 storenemypieceId[3]="pc"+i;
@@ -856,15 +822,15 @@ function checkforEnemy(pieceId,oldcellnumber)
     else if (player2==true&& isKing[pieceId]==false)
     {
 
-        for(let i=0;i<12; i++)
+        for(let i=0;i<15; i++)
         {
-            if(gameBoard[cellvalue-7] =="pc"+i )
+            if(gameBoard[cellvalue-9] =="pc"+i )
             {
                 noEnemy=false;
                 storenemypieceId[4]="pc"+i;
                 storenemypiececell[4]=cellvalue-7;
             }
-             if(gameBoard[cellvalue-9] =="pc"+i)
+             if(gameBoard[cellvalue-11] =="pc"+i)
             {
                 storenemypieceId[5]="pc"+i;
                 storenemypiececell[5]=cellvalue-9;
@@ -875,27 +841,27 @@ function checkforEnemy(pieceId,oldcellnumber)
     else if(player2==true&&isKing[pieceId]==true)
     {
         
-        for(let i=0;i<12; i++)
+        for(let i=0;i<15; i++)
         {
-            if(gameBoard[cellvalue-7] =="pc"+i )
+            if(gameBoard[cellvalue-9] =="pc"+i )
             {
                 noEnemy=false;
                 storenemypieceId[4]="pc"+i;
                 storenemypiececell[4]=cellvalue-7;
             }
-             if(gameBoard[cellvalue-9] =="pc"+i)
+             if(gameBoard[cellvalue-11] =="pc"+i)
             {
                 storenemypieceId[5]="pc"+i;
                 storenemypiececell[5]=cellvalue-9;
                 noEnemy=false;
             } 
-            if(gameBoard[cellvalue+7]=="pc"+i)
+            if(gameBoard[cellvalue+9]=="pc"+i)
             {
                 noEnemy=false;
                 storenemypieceId[6]="pc"+i;
                 storenemypiececell[6]=cellvalue+7;
             }
-            if(gameBoard[cellvalue+9]=="pc"+i)
+            if(gameBoard[cellvalue+11]=="pc"+i)
             {
                 noEnemy=false;
                 storenemypieceId[7]="pc"+i;
@@ -930,15 +896,15 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
     if(isKing[oldId]==false)
     {
 
-    if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+7&&player1==true)
+    if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
     {
-        blackPiecePostions[oldId]+=7;
+        blackPiecePostions[oldId]+=9;
         //clear the O from the first spot
         document.getElementById(oldId).innerHTML='';
     //input O into the second spot we put
         document.getElementById(cellNumber).innerHTML='O';
         replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,+7);
+        updategameBoard(oldId,oldcellnumber,+9);
         player1=false;
         player2=true;
         clickedPiece=false;
@@ -949,9 +915,9 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
         }
     
     }
-    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
+    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+11&&player1==true)
     {
-        blackPiecePostions[oldId]+=9;
+        blackPiecePostions[oldId]+=11;
         //clear the O from the first spot
         document.getElementById(oldId).innerHTML='';
     //input O into the second spot we put
@@ -959,7 +925,7 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
     //document.getElementById(cellNumber).style.color = '';
     //switch the two Id's
         replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,+7);
+        updategameBoard(oldId,oldcellnumber,+11);
         player1=false;
         player2=true;
         clickedPiece=false;
@@ -971,9 +937,9 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
         
 
     }
-    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+14&&player1==true)
+    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+18&&player1==true)
     { 
-            blackPiecePostions[oldId]+=14;
+            blackPiecePostions[oldId]+=18;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
@@ -982,7 +948,7 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
         //switch the two Id's
         eleminatePc(storenemypieceId,0,storenemypiececell);
             replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+14);
+            updategameBoard(oldId,oldcellnumber,+18);
             player1=false;
             player2=true;
             clickedPiece=false;
@@ -997,9 +963,9 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
 
         
     }
-    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+18&&player1==true)
+    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+22&&player1==true)
     {
-        blackPiecePostions[oldId]+=18;
+        blackPiecePostions[oldId]+=22;
         //clear the O from the first spot
         document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
@@ -1009,7 +975,7 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
         //switch the two Id's
         eleminatePc(storenemypieceId,1,storenemypiececell);
         replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,+18);
+        updategameBoard(oldId,oldcellnumber,+22);
         player2points--;    
         updateScore();  
         noEnemy=true;
@@ -1025,30 +991,9 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
     
     }
     //for player 2 statements
-    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-7&&player2==true)
-    {
-    
-        redPiecePositions[oldId]-=7;
-        //clear the O from the first spot
-        document.getElementById(oldId).innerHTML='';
-    //input O into the second spot we put
-        document.getElementById(cellNumber).innerHTML='X';
-    //document.getElementById(cellNumber).style.color = '';
-    //switch the two Id's
-        replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,-7);
-        player1=true;
-        player2=false;
-        clickedPiece=false;
-        noEnemy=true;
-        if(isKing[oldId]==false)
-        {
-        makeKing(oldId);
-        }
-
-    } 
     else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-9&&player2==true)
     {
+    
         redPiecePositions[oldId]-=9;
         //clear the O from the first spot
         document.getElementById(oldId).innerHTML='';
@@ -1067,10 +1012,31 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
         makeKing(oldId);
         }
 
-    }
-    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-14&&player2==true)
+    } 
+    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-11&&player2==true)
     {
-        redPiecePositions[oldId]-=14;
+        redPiecePositions[oldId]-=11;
+        //clear the O from the first spot
+        document.getElementById(oldId).innerHTML='';
+    //input O into the second spot we put
+        document.getElementById(cellNumber).innerHTML='X';
+    //document.getElementById(cellNumber).style.color = '';
+    //switch the two Id's
+        replace(oldId,oldcellnumber,pieceId,cellNumber);
+        updategameBoard(oldId,oldcellnumber,-11);
+        player1=true;
+        player2=false;
+        clickedPiece=false;
+        noEnemy=true;
+        if(isKing[oldId]==false)
+        {
+        makeKing(oldId);
+        }
+
+    }
+    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-18&&player2==true)
+    {
+        redPiecePositions[oldId]-=18;
         //clear the O from the first spot
         document.getElementById(oldId).innerHTML='';
     //input O into the second spot we put
@@ -1080,7 +1046,7 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
 
     eleminatePc(storenemypieceId,4,storenemypiececell);
     replace(oldId,oldcellnumber,pieceId,cellNumber);
-    updategameBoard(oldId,oldcellnumber,-14);
+    updategameBoard(oldId,oldcellnumber,-18);
     player1points--;
     updateScore();
     player1=true;
@@ -1093,12 +1059,12 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
         }
 
     }
-    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-18&&player2==true)
+    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-22&&player2==true)
     {
         
         
 
-        redPiecePositions[oldId]-=18;
+        redPiecePositions[oldId]-=22;
         //clear the O from the first spot
         document.getElementById(oldId).innerHTML='';
     //input O into the second spot we put
@@ -1111,7 +1077,7 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
     player1points--;
     updateScore();
         replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,-18);
+        updategameBoard(oldId,oldcellnumber,-22);
         
         player1=true;
         player2=false;
@@ -1123,42 +1089,26 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
         makeKing(oldId);
         }
 
-    }  // this is the last bracket for isKing==false
+    }  
    
    
-} 
-else if (isKing[oldId]==true)
+}
+   
+
+   
+   
+   
+   
+     if (isKing[oldId]==true)
     {
-        if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+7&&player1==true)
-        {
-            blackPiecePostions[oldId]+=7;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-           eleminatePc(storenemypieceId,0,storenemypiececell);
-            document.getElementById(cellNumber).innerHTML='O';
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+7);
-            player1=false;
-            player2=true;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-        
-        }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
+        if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
         {
             blackPiecePostions[oldId]+=9;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
+           eleminatePc(storenemypieceId,0,storenemypiececell);
             document.getElementById(cellNumber).innerHTML='O';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-        eleminatePc(storenemypieceId,1,storenemypiececell);
             replace(oldId,oldcellnumber,pieceId,cellNumber);
             updategameBoard(oldId,oldcellnumber,+9);
             player1=false;
@@ -1169,18 +1119,20 @@ else if (isKing[oldId]==true)
             {
             makeKing(oldId);
             }
-            
-    
+        
         }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-7&&player1==true)
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+11&&player1==true)
         {
-            blackPiecePostions[oldId]-=7;
+            blackPiecePostions[oldId]+=11;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
             document.getElementById(cellNumber).innerHTML='O';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+        eleminatePc(storenemypieceId,1,storenemypiececell);
             replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,-7);
+            updategameBoard(oldId,oldcellnumber,+11);
             player1=false;
             player2=true;
             clickedPiece=false;
@@ -1189,7 +1141,8 @@ else if (isKing[oldId]==true)
             {
             makeKing(oldId);
             }
-        
+            
+    
         }
         else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-9&&player1==true)
         {
@@ -1210,9 +1163,28 @@ else if (isKing[oldId]==true)
             }
         
         }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+14&&player1==true)
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-11&&player1==true)
+        {
+            blackPiecePostions[oldId]-=11;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='O';
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,-11);
+            player1=false;
+            player2=true;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+        
+        }
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+18&&player1==true)
         { 
-                blackPiecePostions[oldId]+=14;
+                blackPiecePostions[oldId]+=18;
                 //clear the O from the first spot
                 document.getElementById(oldId).innerHTML='';
             //input O into the second spot we put
@@ -1221,7 +1193,7 @@ else if (isKing[oldId]==true)
             //switch the two Id's
             eleminatePc(storenemypieceId,0,storenemypiececell);
                 replace(oldId,oldcellnumber,pieceId,cellNumber);
-                updategameBoard(oldId,oldcellnumber,+14);
+                updategameBoard(oldId,oldcellnumber,+18);
                 player1=false;
                 player2=true;
                 clickedPiece=false;
@@ -1236,9 +1208,9 @@ else if (isKing[oldId]==true)
     
             
         }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+18&&player1==true)
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+22&&player1==true)
         {
-            blackPiecePostions[oldId]+=18;
+            blackPiecePostions[oldId]+=22;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
             //input O into the second spot we put
@@ -1248,7 +1220,7 @@ else if (isKing[oldId]==true)
             //switch the two Id's
             eleminatePc(storenemypieceId,1,storenemypiececell);
             replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+18);
+            updategameBoard(oldId,oldcellnumber,+22);
             player2points--;    
             updateScore();  
             noEnemy=true;
@@ -1263,9 +1235,9 @@ else if (isKing[oldId]==true)
     
         
         }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-14&&player1==true)
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-18&&player1==true)
         { 
-                blackPiecePostions[oldId]-=14;
+                blackPiecePostions[oldId]-=18;
                 //clear the O from the first spot
                 document.getElementById(oldId).innerHTML='';
             //input O into the second spot we put
@@ -1274,7 +1246,7 @@ else if (isKing[oldId]==true)
             //switch the two Id's
             eleminatePc(storenemypieceId,2,storenemypiececell);
                 replace(oldId,oldcellnumber,pieceId,cellNumber);
-                updategameBoard(oldId,oldcellnumber,-14);
+                updategameBoard(oldId,oldcellnumber,-18);
                 player1=false;
                 player2=true;
                 clickedPiece=false;
@@ -1289,9 +1261,9 @@ else if (isKing[oldId]==true)
     
             
         }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-18&&player1==true)
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-22&&player1==true)
         {
-            blackPiecePostions[oldId]-=18;
+            blackPiecePostions[oldId]-=22;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
             //input O into the second spot we put
@@ -1301,7 +1273,7 @@ else if (isKing[oldId]==true)
             //switch the two Id's
             eleminatePc(storenemypieceId,3,storenemypiececell);
             replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,-18);
+            updategameBoard(oldId,oldcellnumber,-22);
             player2points--;    
             updateScore();  
             noEnemy=true;
@@ -1317,30 +1289,9 @@ else if (isKing[oldId]==true)
         
         }
         //for player 2 statements
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-7&&player2==true)
-        {
-            
-            redPiecePositions[oldId]-=7;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='X';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,-7);
-            player1=true;
-            player2=false;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-    
-        } 
         else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-9&&player2==true)
         {
+            
             redPiecePositions[oldId]-=9;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
@@ -1359,10 +1310,31 @@ else if (isKing[oldId]==true)
             makeKing(oldId);
             }
     
-        }
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-14&&player2==true)
+        } 
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-11&&player2==true)
         {
-            redPiecePositions[oldId]-=14;
+            redPiecePositions[oldId]-=11;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='X';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,-11);
+            player1=true;
+            player2=false;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+    
+        }
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-18&&player2==true)
+        {
+            redPiecePositions[oldId]-=18;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
@@ -1372,7 +1344,7 @@ else if (isKing[oldId]==true)
     
         eleminatePc(storenemypieceId,4,storenemypiececell);
         replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,-14);
+        updategameBoard(oldId,oldcellnumber,-18);
         player1points--;
         updateScore();
         player1=true;
@@ -1385,12 +1357,12 @@ else if (isKing[oldId]==true)
             }
     
         }
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-18&&player2==true)
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-22&&player2==true)
         {
             
             
     
-            redPiecePositions[oldId]-=18;
+            redPiecePositions[oldId]-=22;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
@@ -1403,7 +1375,7 @@ else if (isKing[oldId]==true)
         player1points--;
         updateScore();
             replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,-18);
+            updategameBoard(oldId,oldcellnumber,-22);
             
             player1=true;
             player2=false;
@@ -1416,30 +1388,9 @@ else if (isKing[oldId]==true)
             }
         }//checking positive sides
 
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+7&&player2==true)
-        {
-            
-            redPiecePositions[oldId]+=7;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='X';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+7);
-            player1=true;
-            player2=false;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-    
-        } 
         else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+9&&player2==true)
         {
+            
             redPiecePositions[oldId]+=9;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
@@ -1458,10 +1409,31 @@ else if (isKing[oldId]==true)
             makeKing(oldId);
             }
     
-        }
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+14&&player2==true)
+        } 
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+11&&player2==true)
         {
-            redPiecePositions[oldId]+=14;
+            redPiecePositions[oldId]+=11;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='X';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,+11);
+            player1=true;
+            player2=false;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+    
+        }
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+18&&player2==true)
+        {
+            redPiecePositions[oldId]+=18;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
@@ -1471,7 +1443,7 @@ else if (isKing[oldId]==true)
     
         eleminatePc(storenemypieceId,6,storenemypiececell);
         replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,+14);
+        updategameBoard(oldId,oldcellnumber,+18);
         player1points--;
         updateScore();
         player1=true;
@@ -1484,12 +1456,12 @@ else if (isKing[oldId]==true)
             }
     
         }
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+18&&player2==true)
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+22&&player2==true)
         {
             
             
     
-            redPiecePositions[oldId]+=18;
+            redPiecePositions[oldId]+=22;
             //clear the O from the first spot
             document.getElementById(oldId).innerHTML='';
         //input O into the second spot we put
@@ -1502,7 +1474,7 @@ else if (isKing[oldId]==true)
         player1points--;
         updateScore();
             replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+18);
+            updategameBoard(oldId,oldcellnumber,+22);
             
             player1=true;
             player2=false;
@@ -1516,11 +1488,7 @@ else if (isKing[oldId]==true)
         }
         
 
-    }
-    
-        let change=document.getElementById(oldId)
-        change.classList.toggle('clicked');
-    
+    }// checking the positive sides
 
 
 
@@ -1549,9 +1517,8 @@ function eleminatePc(storenemypieceId,index,storenemypiececell)
 
 function updateScore()
 {
-    document.getElementById('P1Score').innerHTML="Player 1 Pieces"+player1points;
-    document.getElementById('P2Score').innerHTML="Player 2 Pieces"+player2points;
-    let status= document.getElementById('winningStatus');
+    document.getElementById('P1Score').innerHTML=player1points;
+    document.getElementById('P2Score').innerHTML=player2points;
 
     //setting the two for false allows for no one to be able to play the board
     if(player1points==0)
@@ -1563,49 +1530,9 @@ function updateScore()
     }
     else if (player2points==0)
     {
-        alert('player 2 has won');
+        alert('player 1 has won');
         player1=false;
         player2=false;
-    }
-
-
-    if(player1points>player2points)
-    {
-        status.innerHTML="Player 1 Winning";
-    }
-    else if (player1points<player2points)
-    {
-        status.innerHTML="Player 2 Winning";
-
-    }
-    else 
-    status.innerHTML="";
-
-
-    
-
-}
-
-function identifyTurn()
-{
-    if(player1==true)
-    {
-        
-        let highLight=document.getElementById('P1Score');
-        highLight.style.color='blue';
-
-        let highLight2=document.getElementById('P2Score'); 
-        highLight2.style.color='grey';
-    }
-    else if (player2==true)
-    {
-        let highLight=document.getElementById('P1Score');
-        highLight.style.color='grey';
-
-        let highLight2=document.getElementById('P2Score');
-        highLight2.style.color='green'
-
-
     }
 
 }
