@@ -23,7 +23,8 @@ var player1points=12,player2points=12;
 var newAttempt=false;
 var startState=false;
 var untoggle=[];
-
+var enemyLeft=false;
+var enemyRight=false;
 
 function Start()
 {
@@ -31,7 +32,7 @@ function Start()
     startState=true;
     iniateallPieces();
     updateScore();
-    //identifyTurn();
+    identifyTurn();
     let change=document.getElementById('start');
     
     change.classList.add("started");
@@ -322,6 +323,7 @@ function iniateallPieces()
     isKing[pc12]=false;
     isKing[pc13]=false;
     isKing[pc14]=false;
+    
 
     
 
@@ -771,12 +773,14 @@ function checkforEnemy(pieceId,oldcellnumber)
             noEnemy=false;
             storenemypieceId[0]="pc"+i;
             storenemypiececell[0]=cellvalue+9;
+            enemyLeft=true;
         }
         if(gameBoard[cellvalue+11] =="pc"+i)
         {
             
             storenemypieceId[1]="pc"+i;
             storenemypiececell[1]=cellvalue+11;
+            enemyRight=true;
            
             noEnemy=false;
         
@@ -829,12 +833,14 @@ function checkforEnemy(pieceId,oldcellnumber)
                 noEnemy=false;
                 storenemypieceId[4]="pc"+i;
                 storenemypiececell[4]=cellvalue-7;
+                enemyLeft=true;
             }
              if(gameBoard[cellvalue-11] =="pc"+i)
             {
                 storenemypieceId[5]="pc"+i;
                 storenemypiececell[5]=cellvalue-9;
                 noEnemy=false;
+                enemyRight=true;
             } 
         }
     }
@@ -1488,7 +1494,12 @@ function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
         }
         
 
-    }// checking the positive sides
+    }
+
+
+    //reset left and right to false
+    enemyLeft=false;
+    enemyRight=false;
 
 
 
@@ -1517,9 +1528,9 @@ function eleminatePc(storenemypieceId,index,storenemypiececell)
 
 function updateScore()
 {
-    document.getElementById('P1Score').innerHTML=player1points;
-    document.getElementById('P2Score').innerHTML=player2points;
-
+    document.getElementById('P1Score').innerHTML="Player 1 Pieces"+player1points;
+    document.getElementById('P2Score').innerHTML="Player 2 Pieces"+player2points;
+    let status= document.getElementById('winningStatus');
     //setting the two for false allows for no one to be able to play the board
     if(player1points==0)
     {
@@ -1533,6 +1544,41 @@ function updateScore()
         alert('player 1 has won');
         player1=false;
         player2=false;
+    }
+    if(player1points>player2points)
+    {
+        status.innerHTML="Player 1 Winning";
+    }
+    else if (player1points<player2points)
+    {
+        status.innerHTML="Player 2 Winning";
+
+    }
+    else 
+    status.innerHTML="";
+
+}
+
+function identifyTurn()
+{
+    if(player1==true)
+    {
+        
+        let highLight=document.getElementById('P1Score');
+        highLight.style.color='blue';
+
+        let highLight2=document.getElementById('P2Score'); 
+        highLight2.style.color='grey';
+    }
+    else if (player2==true)
+    {
+        let highLight=document.getElementById('P1Score');
+        highLight.style.color='grey';
+
+        let highLight2=document.getElementById('P2Score');
+        highLight2.style.color='green'
+
+
     }
 
 }

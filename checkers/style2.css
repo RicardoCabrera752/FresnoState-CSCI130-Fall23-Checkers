@@ -52,35 +52,6 @@ table{
   /* ----------------------------for player 2 pieces----------------------------------- */
   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #pc15,#pc16,#pc17,#pc18,#pc19,#pc20,#pc21,#pc22,#pc23,#pc24,#pc25,#pc26,#pc27,#pc28,#pc29{
   position: relative;
 
@@ -154,3 +125,14 @@ table{
 }
 
 
+#P1Score,#P2Score
+{
+  font-size: 35px;
+  color: grey;
+  margin-left: auto;
+
+}
+#winningStatus
+{
+  font-size: 50PX;
+}
