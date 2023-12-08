@@ -1,0 +1,7 @@
+1. Can take enemy piece, but
+	- can not be done as king;
+2. if hopingover player 2 piece
+	- landing on second black tile on last row
+		- does not become king
+		- but it does become king on the first tile
+		

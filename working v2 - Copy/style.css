@@ -1,0 +1,196 @@
+table{
+  background-color: #000000;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Red{
+    background-color: lightsalmon;
+    width:70px;
+    height:70px;
+
+}
+.black
+{
+    background-color: brown;
+    width:50px;
+    height:50px;
+    color: blue;  
+    text-align: center;
+}
+
+#pc0,#pc1,#pc2,#pc3,#pc4,#pc5,#pc6,#pc7,#pc8,#pc9,#pc10,#pc11 {
+    position: relative;
+  
+  }
+  
+  #pc0::after,#pc1::after,#pc2::after,#pc3::after,#pc4::after,#pc5::after, 
+  #pc6::after,#pc7::after,#pc8::after,#pc9::after,#pc10::after,#pc11::after
+  {
+    content: "";
+   position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: white; /* we can remove this if we have the player choose a color*/
+  
+  }
+  
+  #pc0.clicked::after,#pc1.clicked::after,#pc2.clicked::after,#pc3.clicked::after,#pc4.clicked::after,#pc5.clicked::after,#pc6.clicked::after,
+  #pc7.clicked::after,#pc8.clicked::after,#pc9.clicked::after,#pc10.clicked::after,#pc11.clicked::after
+  {
+    background-color: blue; /* identify when our piece has been clicked */
+  }
+  
+  #pc0.king::after,#pc1.king::after,#pc2.king::after,#pc3.king::after,#pc4.king::after,#pc5.king::after, 
+  #pc6.king::after,#pc7.king::after,#pc8.king::after,#pc9.king::after,#pc10.king::after,#pc11.king::after
+  {
+      background-color: Orange;
+  }
+  /* ----------------------------for player 2 pieces----------------------------------- */
+  
+#pc12,#pc13,#pc14,#pc15,#pc16,#pc17,#pc18,#pc19,#pc20,#pc21,#pc22,#pc23 {
+  position: relative;
+
+}
+
+#pc12::after,#pc13::after,#pc14::after,#pc15::after,#pc16::after,#pc17::after, 
+#pc18::after,#pc19::after,#pc20::after,#pc21::after,#pc22::after,#pc23::after
+{
+  content: "";
+ position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: black; /* we can remove this if we have the player choose a color*/
+  
+}
+
+#pc12.clicked::after,#pc13.clicked::after,#pc14.clicked::after,#pc15.clicked::after,#pc16.clicked::after, #pc17.clicked::after,
+#pc18.clicked::after,#pc19.clicked::after,#pc20.clicked::after,#pc21.clicked::after,#pc22.clicked::after,#pc23.clicked::after
+{
+  background-color: purple; /* identify when our piece has been clicked */
+}
+
+#pc12.king::after,#pc13.king::after,#pc14.king::after,#pc15.king::after,#pc16.king::after,#pc17.king::after, 
+#pc18.king::after,#pc19.king::after,#pc20.king::after,#pc21.king::after,#pc22.king::after,#pc23.king::after
+{
+    background-color: Orange;
+}
+
+
+
+#P1Score,#P2Score
+{
+  font-size: 35px;
+  color: grey;
+  margin-left: auto;
+
+}
+#winningStatus
+{
+  font-size: 50PX;
+}
+
+
+body{
+  background-color: lightblue;
+}
+
+
+
+
+
+
+
+
+
+
+/* this is needed since non existen cell id will be created when pieces moved*/
+[id^='cell']{
+  position: relative;
+
+}
+
+/*this work the hints*/
+#cell1.hint::after,
+#cell2.hint::after,
+#cell3.hint::after,
+#cell4.hint::after,
+#cell5.hint::after,
+#cell6.hint::after,
+#cell7.hint::after,
+#cell8.hint::after,
+#cell9.hint::after,
+#cell10.hint::after,
+#cell11.hint::after,
+#cell12.hint::after,
+#cell13.hint::after,
+#cell14.hint::after,
+#cell15.hint::after,
+#cell16.hint::after,
+#cell17.hint::after,
+#cell18.hint::after,
+#cell19.hint::after,
+#cell20.hint::after,
+#cell21.hint::after,
+#cell22.hint::after,
+#cell23.hint::after,
+#cell24.hint::after,
+#cell25.hint::after,
+#cell26.hint::after,
+#cell27.hint::after,
+#cell28.hint::after,
+#cell29.hint::after,
+#cell30.hint::after,
+#cell31.hint::after,
+#cell32.hint::after,
+#cell33.hint::after,
+#cell34.hint::after,
+#cell35.hint::after,
+#cell36.hint::after,
+#cell37.hint::after,
+#cell38.hint::after,
+#cell39.hint::after,
+#cell40.hint::after,
+#cell41.hint::after,
+#cell42.hint::after,
+#cell43.hint::after,
+#cell44.hint::after,
+#cell45.hint::after,
+#cell46.hint::after,
+#cell47.hint::after,
+#cell48.hint::after,
+#cell49.hint::after,
+#cell50.hint::after,
+#cell51.hint::after,
+#cell52.hint::after,
+#cell53.hint::after,
+#cell54.hint::after,
+#cell55.hint::after,
+#cell56.hint::after,
+#cell57.hint::after,
+#cell58.hint::after,
+#cell59.hint::after,
+#cell60.hint::after,
+#cell61.hint::after,
+#cell62.hint::after,
+#cell63.hint::after
+{
+  content: "";
+ position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+  border: solid chartreuse 5px;
+}
+

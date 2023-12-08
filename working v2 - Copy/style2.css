@@ -1,0 +1,121 @@
+.Red{
+    background-color: red;
+    width:70px;
+    height:70px;
+
+}
+.black
+{
+    background-color: black;
+    width:50px;
+    height:50px;
+    color: blue;  
+    text-align: center;
+}
+
+#pc0,#pc1,#pc2,#pc3,#pc4,#pc5,#pc6,#pc7,#pc8,#pc9,#pc10,#pc11,#pc12,#pc13,#pc14{
+    position: relative;
+  
+  }
+  
+  #pc0::after,#pc1::after,#pc2::after,#pc3::after,#pc4::after,#pc5::after, 
+  #pc6::after,#pc7::after,#pc8::after,#pc9::after,#pc10::after,#pc11::after,#pc12::after,#pc13::after,#pc14::after
+  {
+    content: "";
+   position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: green; /* we can remove this if we have the player choose a color*/
+  
+  }
+  
+  #pc0.clicked::after,#pc1.clicked::after,#pc2.clicked::after,#pc3.clicked::after,#pc4.clicked::after,#pc5.clicked::after,#pc6.clicked::after,
+  #pc7.clicked::after,#pc8.clicked::after,#pc9.clicked::after,#pc10.clicked::after,#pc11.clicked::after,#pc12.clicked::after,#pc13.clicked::after,#pc14.clicked::after
+  {
+    background-color: blue; /* identify when our piece has been clicked */
+  }
+  
+  #pc0.king::after,#pc1.king::after,#pc2.king::after,#pc3.king::after,#pc4.king::after,#pc5.king::after, 
+  #pc6.king::after,#pc7.king::after,#pc8.king::after,#pc9.king::after,#pc10.king::after,#pc11.king::after,#pc12.king::after,#pc13.king::after,#pc14.king::after
+  {
+      background-color: Orange;
+  }
+  /* ----------------------------for player 2 pieces----------------------------------- */
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pc15,#pc16,#pc17,#pc18,#pc19,#pc20,#pc21,#pc22,#pc23,#pc24,#pc25,#pc26,#pc27,#pc28,#pc29{
+  position: relative;
+
+}
+
+#pc15::after,#pc16::after,#pc17::after, 
+#pc18::after,#pc19::after,#pc20::after,#pc21::after,#pc22::after,#pc23::after,#pc24::after,#pc25::after,#pc26::after,#pc27::after,
+#pc28::after,#pc29::after
+{
+  content: "";
+ position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: yellow; /* we can remove this if we have the player choose a color*/
+  
+}
+
+#pc15.clicked::after,#pc16.clicked::after, #pc17.clicked::after,
+#pc18.clicked::after,#pc19.clicked::after,#pc20.clicked::after,#pc21.clicked::after,#pc22.clicked::after,#pc23.clicked::after,
+#pc24.clicked::after,#pc25.clicked::after,#pc26.clicked::after,#pc27.clicked::after,#pc28.clicked::after,#pc29.clicked::after
+{
+  background-color: purple; /* identify when our piece has been clicked */
+}
+
+#pc15.king::after,#pc16.king::after,#pc17.king::after, 
+#pc18.king::after,#pc19.king::after,#pc20.king::after,#pc21.king::after,#pc22.king::after,#pc23.king::after
+{
+    background-color: Orange;
+}
+
+#start
+{
+  background-color: red;
+}
+#start.started
+{
+  background-color: green;
+  color: white;
+}
