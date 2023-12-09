@@ -102,12 +102,6 @@ table{
 }
 
 
-[id^='cell']
-{
-  position: relative;
-
-}
-
 
 [id^='cell'].hint::after
 {

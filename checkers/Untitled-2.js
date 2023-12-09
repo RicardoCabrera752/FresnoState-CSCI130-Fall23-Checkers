@@ -317,11 +317,16 @@ function clickPiece(pieceId,cellNumber)
         oldId=null;
         pieceId=null;
         clickedPiece=false;
-        if(isKing(pieceId)==true)
+        noEnemy=true; //without this the new piece we click will thinkit has enemy when it doesnt
+        
+        if(isKing[pieceId]==true)
         {
+           
             turnoffKingHints();
         }
         else{
+            
+
             turnoffHint();
         }
 
@@ -340,7 +345,7 @@ function clickPiece(pieceId,cellNumber)
         oldcellnumber=cellNumber;
         
         //to indicate that the piece has been clicked on and will be the one to move
-        //cell.classList.toggle('clicked');
+        cell.classList.toggle('clicked');
         clickedPiece=true;
         
        //noEnemy=checkforEnemy(oldId,oldcellnumber); this does not work
@@ -423,7 +428,7 @@ function iniateallPieces()
     isKing[pc6]=false;
     isKing[pc7]=false;
 
-    isKing[pc8]=true;
+    isKing[pc8]=false;
     isKing[pc9]=false;
     isKing[pc10]=false;
     isKing[pc11]=false;
@@ -831,14 +836,14 @@ function updateScore()
     //setting the two for false allows for no one to be able to play the board
     if(player1points==0)
     {
-        alert("Player 2 Won");
+        alert("Player 2 has Won");
         player1=false;
         player2=false;
        
     }
     else if (player2points==0)
     {
-        alert('player 2 has won');
+        alert('player 1 has won');
         player1=false;
         player2=false;
     }
@@ -1259,7 +1264,7 @@ function hopOverforPlayer2(oldId,oldcellnumber,pieceId,cellNumber)
        
    
     let cellvalue = parseInt(cellNumber.replace(/\D/g, ""), 10);
-   
+  
    
     //for player 2 statements
     if(isKing[oldId]==false)
@@ -1363,6 +1368,7 @@ function hopOverforPlayer2(oldId,oldcellnumber,pieceId,cellNumber)
    
    
 } else if(isKing[oldId]==true){
+   
             //for player 2 statements
          if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-7&&player2==true)
         {
@@ -1662,9 +1668,11 @@ turnoffKingHints();
 
 function kingMovementsforplayer2(oldId,oldcellnumber,pieceId,cellNumber)
 {
+   
     let cellvalue = parseInt(cellNumber.replace(/\D/g, ""), 10);
-  if(isKing[oldId]==true)
+  if(noEnemy==true)
   {
+  
     
   if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+7&&player2==true)
     { 
@@ -1747,7 +1755,6 @@ else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-9&&player2==true)
 }
 else 
 {
-  
     hopOverforPlayer2(oldId,oldcellnumber,pieceId,cellNumber);
     noEnemy=true;
     
