@@ -19,12 +19,15 @@ var pc15,pc16,pc17,pc18,pc19,pc20,pc21,pc22,pc23;
 var pc24,pc25,pc26,pc27,pc28,pc29;
 var storenemypieceId=[];
 var storenemypiececell=[];
-var player1points=12,player2points=12;
+var player1points=14,player2points=14;
 var startState=false;
 var untoggle=[];
 var enemyLeft=false;
 var enemyRight=false;
 var checkFriendlyasKing=[]; // we only need to check 4 locations
+var hintSpotsforPawn=[]; //shold only be two
+//time in seconds  
+// 
 
 function Start()
 {
@@ -54,7 +57,8 @@ function hintSpot(pieceId)
             {
                 let cell1=blackPiecePostions[pieceId]+9;
                 let hint1=document.getElementById('cell'+cell1);
-                hint1.classList.toggle('hint');   
+                hint1.classList.toggle('hint'); 
+                hintSpotsforPawn[0]=true;  
                 untoggle[index]=hint1;
             }
             else if(gameBoard[piecePosition+11]==null&&index==1)
@@ -63,6 +67,7 @@ function hintSpot(pieceId)
                 let hint2=document.getElementById('cell'+cell2);
                 hint2.classList.toggle('hint');  
                 untoggle[index]=hint2;
+                hintSpotsforPawn[1]=true;
             }
 
         }
@@ -82,7 +87,9 @@ function hintSpot(pieceId)
                 let hint1=document.getElementById('cell'+cell1);
                 hint1.classList.toggle('hint');   
                 untoggle[index]=hint1;
-                 }
+                hintSpotsforPawn[0]=true; 
+                
+                }
             }
             else if(gameBoard[piecePosition+11]!=null &&index==1)
             {
@@ -92,6 +99,7 @@ function hintSpot(pieceId)
                 let hint2=document.getElementById('cell'+cell2);
                 hint2.classList.toggle('hint');   
                 untoggle[index]=hint2;
+                hintSpotsforPawn[1]=true; 
                 }
 
             }
@@ -101,6 +109,7 @@ function hintSpot(pieceId)
                 let hint3=document.getElementById('cell'+cell3);
                 hint3.classList.toggle('hint');   
                 untoggle[index]=hint3;
+                hintSpotsforPawn[2]=true; 
             }
             else if(gameBoard[piecePosition+11]==null && index==3)
             {
@@ -108,6 +117,81 @@ function hintSpot(pieceId)
                 let hint4=document.getElementById('cell'+cell4);
                 hint4.classList.toggle('hint');   
                 untoggle[index]=hint4;
+                hintSpotsforPawn[3]=true; 
+            }
+        }   
+    }
+    if(player2==true&& noEnemy==true)
+	{
+        let index =0;
+    let piecePosition= redPiecePositions[pieceId];
+        for(index; index<2; index++)
+        {
+            if(gameBoard[piecePosition-9]==null&&index==0)
+            {
+                let cell1=redPiecePositions[pieceId]-9;
+                let hint1=document.getElementById('cell'+cell1);
+                hint1.classList.toggle('hint'); 
+                hintSpotsforPawn[0]=true;  
+                untoggle[index]=hint1;
+            }
+            else if(gameBoard[piecePosition-11]==null&&index==1)
+            {
+                let cell2=redPiecePositions[pieceId]-11;
+                let hint2=document.getElementById('cell'+cell2);
+                hint2.classList.toggle('hint');  
+                untoggle[index]=hint2;
+                hintSpotsforPawn[1]=true;
+            }
+
+        }
+ 
+    }//if there is an enemy than check behind it as well
+    else if (player2==true && noEnemy==false)
+    {
+        let index=0;
+        let piecePosition= redPiecePositions[pieceId];
+        for(index;index<4;index++)
+        {
+            if(gameBoard[piecePosition-9]!=null&&index==0)
+            {
+                 if(gameBoard[piecePosition-18]==null)
+                {  
+                let cell1=redPiecePositions[pieceId]-18;
+                let hint1=document.getElementById('cell'+cell1);
+                hint1.classList.toggle('hint');   
+                untoggle[index]=hint1;
+                hintSpotsforPawn[0]=true; 
+                
+                }
+            }
+            else if(gameBoard[piecePosition-11]!=null &&index==1)
+            {
+                if(gameBoard[piecePosition-22]==null)
+                {  
+                let cell2=redPiecePositions[pieceId]-22;
+                let hint2=document.getElementById('cell'+cell2);
+                hint2.classList.toggle('hint');   
+                untoggle[index]=hint2;
+                hintSpotsforPawn[1]=true; 
+                }
+
+            }
+            else if(gameBoard[piecePosition-9]==null && index==2)
+            {
+                let cell3=redPiecePositions[pieceId]-9;
+                let hint3=document.getElementById('cell'+cell3);
+                hint3.classList.toggle('hint');   
+                untoggle[index]=hint3;
+                hintSpotsforPawn[2]=true; 
+            }
+            else if(gameBoard[piecePosition-11]==null && index==3)
+            {
+                let cell4=redPiecePositions[pieceId]-11;
+                let hint4=document.getElementById('cell'+cell4);
+                hint4.classList.toggle('hint');   
+                untoggle[index]=hint4;
+                hintSpotsforPawn[3]=true; 
             }
         }   
     }
@@ -189,10 +273,12 @@ function clickPiece(pieceId,cellNumber)
        checkforEnemy(pieceId,oldcellnumber);
        if(isKing[pieceId]==true)
        {
-        hintspotforKings(pieceId);
+        
+        hintspotforKingsPlayer2(pieceId);
        }
        else{
-        hintspotforKingsPlayer2(pieceId);
+        
+        hintSpot(pieceId);
        }
     
     }
@@ -422,11 +508,18 @@ function movePieceto(oldId,oldcellnumber,pieceId,cellNumber,noEnemy)
 else
 {
     
-    
-hopOver(oldId,oldcellnumber,pieceId,cellNumber);
+if(player1==true)
+{    
+hopOverforPlayer1(oldId,oldcellnumber,pieceId,cellNumber);
+}
+else 
+{
+hopOverforPlayer2(oldId,oldcellnumber,pieceId,cellNumber);
+}
 noEnemy=true;
 
 }
+
 turnoffHint();
 identifyTurn();
 }
@@ -1353,22 +1446,28 @@ function identifyTurn()
 
 function turnoffHint()
 {
-    for(let i=0;i<untoggle.length; i++)
+    for(let i=0;i<hintSpotsforPawn.length; i++)
 {
+
+    if(hintSpotsforPawn[i]==true)
+    {
     untoggle[i].classList.toggle('hint');
-    //null we dont accidentaly toggle it
-    untoggle[i]=null;
+    hintSpotsforPawn[i]=false; 
+    }
+    
 }
 
 }
 function turnoffKingHints()
 {
 
-    for(let i=0;i<untoggle.length; i++)
+    for(let i=0;i<hintSpotsforPawn.length; i++)
 {
+    if(hintSpotsforPawn[i]==true)
+    {
     untoggle[i].classList.toggle('hint');
-    //null we dont accidentaly toggle it
-    untoggle[i]=null;
+    hintSpotsforPawn[i]=false; 
+    }
 }
 
 }
@@ -1470,6 +1569,7 @@ else
     noEnemy=true;
     
 }
+turnoffKingHints();
 
 }
 
@@ -2143,6 +2243,7 @@ function hintspotforKings(pieceId)
                 let hint1=document.getElementById('cell'+cell1);
                 hint1.classList.toggle('hint');   
                 untoggle[index]=hint1;
+                hintSpotsforPawn[0]=true; 
             }
             else if(gameBoard[piecePosition+11]==null&&index==1)
             {
@@ -2150,6 +2251,7 @@ function hintspotforKings(pieceId)
                 let hint2=document.getElementById('cell'+cell2);
                 hint2.classList.toggle('hint');  
                 untoggle[index]=hint2;
+                hintSpotsforPawn[1]=true; 
             }
             else if(gameBoard[piecePosition-9]==null&&index==2)
             {
@@ -2158,6 +2260,7 @@ function hintspotforKings(pieceId)
                 let hint3=document.getElementById('cell'+cell3);
                 hint3.classList.toggle('hint');  
                 untoggle[index]=hint3;
+                hintSpotsforPawn[2]=true; 
             }
             else if(gameBoard[piecePosition-11]==null&&index==3)
             {
@@ -2165,6 +2268,7 @@ function hintspotforKings(pieceId)
                 let hint4=document.getElementById('cell'+cell4);
                 hint4.classList.toggle('hint');  
                 untoggle[index]=hint4;
+                hintSpotsforPawn[3]=true; 
             }
 
         }
@@ -2185,6 +2289,7 @@ function hintspotforKings(pieceId)
                 let hint1=document.getElementById('cell'+cell1);
                 hint1.classList.toggle('hint');   
                 untoggle[index]=hint1;
+                hintSpotsforPawn[0]=true; 
                  }
             }
             else if(gameBoard[piecePosition+11]!=null &&index==1)
@@ -2195,6 +2300,7 @@ function hintspotforKings(pieceId)
                 let hint2=document.getElementById('cell'+cell2);
                 hint2.classList.toggle('hint');   
                 untoggle[index]=hint2;
+                hintSpotsforPawn[1]=true; 
                 }
 
             }//check pieces in front
@@ -2204,6 +2310,7 @@ function hintspotforKings(pieceId)
                 let hint3=document.getElementById('cell'+cell3);
                 hint3.classList.toggle('hint');   
                 untoggle[index]=hint3;
+                hintSpotsforPawn[2]=true; 
             }
             else if(gameBoard[piecePosition+11]==null && index==3)
             {
@@ -2211,6 +2318,7 @@ function hintspotforKings(pieceId)
                 let hint4=document.getElementById('cell'+cell4);
                 hint4.classList.toggle('hint');   
                 untoggle[index]=hint4;
+                hintSpotsforPawn[3]=true; 
             }
             //check the 2 space pieces behind
             else if(gameBoard[piecePosition-9]!=null&&index==4)
@@ -2222,6 +2330,7 @@ function hintspotforKings(pieceId)
                 let hint5=document.getElementById('cell'+cell5);
                 hint5.classList.toggle('hint');   
                 untoggle[index]=hint5;
+                hintSpotsforPawn[4]=true; 
                  }
             }
             else if(gameBoard[piecePosition-11]!=null &&index==5)
@@ -2232,6 +2341,7 @@ function hintspotforKings(pieceId)
                 let hint6=document.getElementById('cell'+cell6);
                 hint6.classList.toggle('hint');   
                 untoggle[index]=hint6;
+                hintSpotsforPawn[5]=true; 
                 }
 
             }
@@ -2242,6 +2352,7 @@ function hintspotforKings(pieceId)
                 let hint7=document.getElementById('cell'+cell7);
                 hint7.classList.toggle('hint');   
                 untoggle[index]=hint7;
+                hintSpotsforPawn[6]=true; 
             }
             else if(gameBoard[piecePosition-11]==null && index==7)
             {
@@ -2249,6 +2360,7 @@ function hintspotforKings(pieceId)
                 let hint8=document.getElementById('cell'+cell8);
                 hint8.classList.toggle('hint');   
                 untoggle[index]=hint8;
+                hintSpotsforPawn[7]=true; 
             }
         }
 
@@ -2372,6 +2484,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint1=document.getElementById('cell'+cell1);
                 hint1.classList.toggle('hint');   
                 untoggle[index]=hint1;
+                hintSpotsforPawn[0]=true; 
             }
             else if(gameBoard[piecePosition+11]==null&&index==1)
             {
@@ -2379,6 +2492,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint2=document.getElementById('cell'+cell2);
                 hint2.classList.toggle('hint');  
                 untoggle[index]=hint2;
+                hintSpotsforPawn[1]=true; 
             }
             else if(gameBoard[piecePosition-9]==null&&index==2)
             {
@@ -2387,6 +2501,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint3=document.getElementById('cell'+cell3);
                 hint3.classList.toggle('hint');  
                 untoggle[index]=hint3;
+                hintSpotsforPawn[2]=true; 
             }
             else if(gameBoard[piecePosition-11]==null&&index==3)
             {
@@ -2394,6 +2509,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint4=document.getElementById('cell'+cell4);
                 hint4.classList.toggle('hint');  
                 untoggle[index]=hint4;
+                hintSpotsforPawn[3]=true; 
             }
 
         }
@@ -2414,6 +2530,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint1=document.getElementById('cell'+cell1);
                 hint1.classList.toggle('hint');   
                 untoggle[index]=hint1;
+                hintSpotsforPawn[0]=true; 
                  }
             }
             else if(gameBoard[piecePosition+11]!=null &&index==1)
@@ -2424,6 +2541,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint2=document.getElementById('cell'+cell2);
                 hint2.classList.toggle('hint');   
                 untoggle[index]=hint2;
+                hintSpotsforPawn[1]=true; 
                 }
 
             }//check pieces in front
@@ -2433,6 +2551,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint3=document.getElementById('cell'+cell3);
                 hint3.classList.toggle('hint');   
                 untoggle[index]=hint3;
+                hintSpotsforPawn[2]=true; 
             }
             else if(gameBoard[piecePosition+11]==null && index==3)
             {
@@ -2440,6 +2559,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint4=document.getElementById('cell'+cell4);
                 hint4.classList.toggle('hint');   
                 untoggle[index]=hint4;
+                hintSpotsforPawn[3]=true; 
             }
             //check the 2 space pieces behind
             else if(gameBoard[piecePosition-9]!=null&&index==4)
@@ -2451,6 +2571,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint5=document.getElementById('cell'+cell5);
                 hint5.classList.toggle('hint');   
                 untoggle[index]=hint5;
+                hintSpotsforPawn[4]=true; 
                  }
             }
             else if(gameBoard[piecePosition-11]!=null &&index==5)
@@ -2461,6 +2582,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint6=document.getElementById('cell'+cell6);
                 hint6.classList.toggle('hint');   
                 untoggle[index]=hint6;
+                hintSpotsforPawn[5]=true; 
                 }
 
             }
@@ -2471,6 +2593,7 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint7=document.getElementById('cell'+cell7);
                 hint7.classList.toggle('hint');   
                 untoggle[index]=hint7;
+                hintSpotsforPawn[6]=true; 
             }
             else if(gameBoard[piecePosition-11]==null && index==7)
             {
@@ -2478,11 +2601,13 @@ function hintspotforKingsPlayer2(pieceId)
                 let hint8=document.getElementById('cell'+cell8);
                 hint8.classList.toggle('hint');   
                 untoggle[index]=hint8;
+                hintSpotsforPawn[7]=true; 
             }
         }
 
        
     }
+   
 
 }
 
