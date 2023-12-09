@@ -22,12 +22,12 @@ var storenemypiececell=[];
 var player1points=14,player2points=14;
 var startState=false;
 var untoggle=[];
-var enemyLeft=false;
-var enemyRight=false;
+var friendlyLeft=false;
+var friendlyRight=false;
 var checkFriendlyasKing=[]; // we only need to check 4 locations
 var hintSpotsforPawn=[]; //shold only be two
 //time in seconds  
-// 
+//turns 
 
 function Start()
 {
@@ -221,7 +221,7 @@ function clickPiece(pieceId,cellNumber)
         //pieceId=null;
         clickedPiece=false;
         noEnemy=true;
-        if(isKing[pieceId])
+        if(isKing[pieceId]==true)
         {
             turnoffKingHints();
         }
@@ -510,6 +510,7 @@ else
     
 if(player1==true)
 {    
+    
 hopOverforPlayer1(oldId,oldcellnumber,pieceId,cellNumber);
 }
 else 
@@ -753,620 +754,6 @@ function updategameBoard(oldId,oldcellnumber,spaceMoved)
 
 
 }
-function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
-{
-    let cellvalue = parseInt(cellNumber.replace(/\D/g, ""), 10);
-
-   
-    if(isKing[oldId]==false)
-    {
-
-    if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
-    {
-        blackPiecePostions[oldId]+=9;
-        //clear the O from the first spot
-        document.getElementById(oldId).innerHTML='';
-    //input O into the second spot we put
-        document.getElementById(cellNumber).innerHTML='O';
-        replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,+9);
-        player1=false;
-        player2=true;
-        clickedPiece=false;
-        noEnemy=true;
-        if(isKing[oldId]==false)
-        {
-        makeKing(oldId);
-        }
-    
-    }
-    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+11&&player1==true)
-    {
-        blackPiecePostions[oldId]+=11;
-        //clear the O from the first spot
-        document.getElementById(oldId).innerHTML='';
-    //input O into the second spot we put
-        document.getElementById(cellNumber).innerHTML='O';
-    //document.getElementById(cellNumber).style.color = '';
-    //switch the two Id's
-        replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,+11);
-        player1=false;
-        player2=true;
-        clickedPiece=false;
-        noEnemy=true;
-        if(isKing[oldId]==false)
-        {
-        makeKing(oldId);
-        }
-        
-
-    }
-    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+18&&player1==true)
-    { 
-            blackPiecePostions[oldId]+=18;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='O';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-        eleminatePc(storenemypieceId,0,storenemypiececell);
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+18);
-            player1=false;
-            player2=true;
-            clickedPiece=false;
-            noEnemy=true;
-            player2points--;
-            updateScore();
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-            
-
-        
-    }
-    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+22&&player1==true)
-    {
-        blackPiecePostions[oldId]+=22;
-        //clear the O from the first spot
-        document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-        document.getElementById(cellNumber).innerHTML='O';
-        //cell.style.color='';
-        //document.getElementById(oldId).style.color = '';
-        //switch the two Id's
-        eleminatePc(storenemypieceId,1,storenemypiececell);
-        replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,+22);
-        player2points--;    
-        updateScore();  
-        noEnemy=true;
-        player1=false;
-       player2=true;
-     clickedPiece=false;
-     if(isKing[oldId]==false)
-        {
-         makeKing(oldId);
-         }
-
-
-    
-    }
-    //for player 2 statements
-    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-9&&player2==true)
-    {
-    
-        redPiecePositions[oldId]-=9;
-        //clear the O from the first spot
-        document.getElementById(oldId).innerHTML='';
-    //input O into the second spot we put
-        document.getElementById(cellNumber).innerHTML='X';
-    //document.getElementById(cellNumber).style.color = '';
-    //switch the two Id's
-        replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,-9);
-        player1=true;
-        player2=false;
-        clickedPiece=false;
-        noEnemy=true;
-        if(isKing[oldId]==false)
-        {
-        makeKing(oldId);
-        }
-
-    } 
-    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-11&&player2==true)
-    {
-        redPiecePositions[oldId]-=11;
-        //clear the O from the first spot
-        document.getElementById(oldId).innerHTML='';
-    //input O into the second spot we put
-        document.getElementById(cellNumber).innerHTML='X';
-    //document.getElementById(cellNumber).style.color = '';
-    //switch the two Id's
-        replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,-11);
-        player1=true;
-        player2=false;
-        clickedPiece=false;
-        noEnemy=true;
-        if(isKing[oldId]==false)
-        {
-        makeKing(oldId);
-        }
-
-    }
-    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-18&&player2==true)
-    {
-        redPiecePositions[oldId]-=18;
-        //clear the O from the first spot
-        document.getElementById(oldId).innerHTML='';
-    //input O into the second spot we put
-        document.getElementById(cellNumber).innerHTML='X';
-    //document.getElementById(cellNumber).style.color = '';
-    //switch the two Id's
-
-    eleminatePc(storenemypieceId,4,storenemypiececell);
-    replace(oldId,oldcellnumber,pieceId,cellNumber);
-    updategameBoard(oldId,oldcellnumber,-18);
-    player1points--;
-    updateScore();
-    player1=true;
-    player2=false;
-    clickedPiece=false;
-    noEnemy=true;
-        if(isKing[oldId]==false)
-        {
-        makeKing(oldId);
-        }
-
-    }
-    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-22&&player2==true)
-    {
-        
-        
-
-        redPiecePositions[oldId]-=22;
-        //clear the O from the first spot
-        document.getElementById(oldId).innerHTML='';
-    //input O into the second spot we put
-        document.getElementById(cellNumber).innerHTML='X';
-    //document.getElementById(cellNumber).style.color = '';
-    //switch the two Id's
-
-
-    eleminatePc(storenemypieceId,5,storenemypiececell);
-    player1points--;
-    updateScore();
-        replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,-22);
-        
-        player1=true;
-        player2=false;
-        clickedPiece=false;
-        noEnemy=true;
-        
-        if(isKing[oldId]==false)
-        {
-        makeKing(oldId);
-        }
-
-    }  
-   
-   
-}
-   
-
-   
-   
-   
-   
-     if (isKing[oldId]==true)
-    {
-        if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
-        {
-            blackPiecePostions[oldId]+=9;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-           eleminatePc(storenemypieceId,0,storenemypiececell);
-            document.getElementById(cellNumber).innerHTML='O';
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+9);
-            player1=false;
-            player2=true;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-        
-        }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+11&&player1==true)
-        {
-            blackPiecePostions[oldId]+=11;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='O';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-        eleminatePc(storenemypieceId,1,storenemypiececell);
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+11);
-            player1=false;
-            player2=true;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-            
-    
-        }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-9&&player1==true)
-        {
-            blackPiecePostions[oldId]-=9;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='O';
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,-9);
-            player1=false;
-            player2=true;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-        
-        }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-11&&player1==true)
-        {
-            blackPiecePostions[oldId]-=11;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='O';
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,-11);
-            player1=false;
-            player2=true;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-        
-        }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+18&&player1==true)
-        { 
-                blackPiecePostions[oldId]+=18;
-                //clear the O from the first spot
-                document.getElementById(oldId).innerHTML='';
-            //input O into the second spot we put
-                document.getElementById(cellNumber).innerHTML='O';
-            //document.getElementById(cellNumber).style.color = '';
-            //switch the two Id's
-            eleminatePc(storenemypieceId,0,storenemypiececell);
-                replace(oldId,oldcellnumber,pieceId,cellNumber);
-                updategameBoard(oldId,oldcellnumber,+18);
-                player1=false;
-                player2=true;
-                clickedPiece=false;
-                noEnemy=true;
-                player2points--;
-                updateScore();
-                if(isKing[oldId]==false)
-                {
-                makeKing(oldId);
-                }
-                
-    
-            
-        }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+22&&player1==true)
-        {
-            blackPiecePostions[oldId]+=22;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-            //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='O';
-            //cell.style.color='';
-            //document.getElementById(oldId).style.color = '';
-            //switch the two Id's
-            eleminatePc(storenemypieceId,1,storenemypiececell);
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+22);
-            player2points--;    
-            updateScore();  
-            noEnemy=true;
-            player1=false;
-           player2=true;
-         clickedPiece=false;
-         if(isKing[oldId]==false)
-            {
-             makeKing(oldId);
-             }
-    
-    
-        
-        }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-18&&player1==true)
-        { 
-                blackPiecePostions[oldId]-=18;
-                //clear the O from the first spot
-                document.getElementById(oldId).innerHTML='';
-            //input O into the second spot we put
-                document.getElementById(cellNumber).innerHTML='O';
-            //document.getElementById(cellNumber).style.color = '';
-            //switch the two Id's
-            eleminatePc(storenemypieceId,2,storenemypiececell);
-                replace(oldId,oldcellnumber,pieceId,cellNumber);
-                updategameBoard(oldId,oldcellnumber,-18);
-                player1=false;
-                player2=true;
-                clickedPiece=false;
-                noEnemy=true;
-                player2points--;
-                updateScore();
-                if(isKing[oldId]==false)
-                {
-                makeKing(oldId);
-                }
-                
-    
-            
-        }
-        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-22&&player1==true)
-        {
-            blackPiecePostions[oldId]-=22;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-            //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='O';
-            //cell.style.color='';
-            //document.getElementById(oldId).style.color = '';
-            //switch the two Id's
-            eleminatePc(storenemypieceId,3,storenemypiececell);
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,-22);
-            player2points--;    
-            updateScore();  
-            noEnemy=true;
-            player1=false;
-           player2=true;
-         clickedPiece=false;
-         if(isKing[oldId]==false)
-            {
-             makeKing(oldId);
-             }
-    
-    
-        
-        }
-        //for player 2 statements
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-9&&player2==true)
-        {
-            
-            redPiecePositions[oldId]-=9;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='X';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,-9);
-            player1=true;
-            player2=false;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-    
-        } 
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-11&&player2==true)
-        {
-            redPiecePositions[oldId]-=11;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='X';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,-11);
-            player1=true;
-            player2=false;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-    
-        }
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-18&&player2==true)
-        {
-            redPiecePositions[oldId]-=18;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='X';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-    
-        eleminatePc(storenemypieceId,4,storenemypiececell);
-        replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,-18);
-        player1points--;
-        updateScore();
-        player1=true;
-        player2=false;
-        clickedPiece=false;
-        noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-    
-        }
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-22&&player2==true)
-        {
-            
-            
-    
-            redPiecePositions[oldId]-=22;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='X';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-    
-    
-        eleminatePc(storenemypieceId,5,storenemypiececell);
-        player1points--;
-        updateScore();
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,-22);
-            
-            player1=true;
-            player2=false;
-            clickedPiece=false;
-            noEnemy=true;
-            
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-        }//checking positive sides
-
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+9&&player2==true)
-        {
-            
-            redPiecePositions[oldId]+=9;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='X';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+9);
-            player1=true;
-            player2=false;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-    
-        } 
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+11&&player2==true)
-        {
-            redPiecePositions[oldId]+=11;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='X';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+11);
-            player1=true;
-            player2=false;
-            clickedPiece=false;
-            noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-    
-        }
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+18&&player2==true)
-        {
-            redPiecePositions[oldId]+=18;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='X';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-    
-        eleminatePc(storenemypieceId,6,storenemypiececell);
-        replace(oldId,oldcellnumber,pieceId,cellNumber);
-        updategameBoard(oldId,oldcellnumber,+18);
-        player1points--;
-        updateScore();
-        player1=true;
-        player2=false;
-        clickedPiece=false;
-        noEnemy=true;
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-    
-        }
-        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+22&&player2==true)
-        {
-            
-            
-    
-            redPiecePositions[oldId]+=22;
-            //clear the O from the first spot
-            document.getElementById(oldId).innerHTML='';
-        //input O into the second spot we put
-            document.getElementById(cellNumber).innerHTML='X';
-        //document.getElementById(cellNumber).style.color = '';
-        //switch the two Id's
-    
-    
-        eleminatePc(storenemypieceId,7,storenemypiececell);
-        player1points--;
-        updateScore();
-            replace(oldId,oldcellnumber,pieceId,cellNumber);
-            updategameBoard(oldId,oldcellnumber,+22);
-            
-            player1=true;
-            player2=false;
-            clickedPiece=false;
-            noEnemy=true;
-            
-            if(isKing[oldId]==false)
-            {
-            makeKing(oldId);
-            }
-        }
-        
-
-    }
-
-
-    //reset left and right to false
-    enemyLeft=false;
-    enemyRight=false;
-
-    identifyTurn();
-
-
-
-    
-}
-    
 
 
 function eleminatePc(storenemypieceId,index,storenemypiececell)
@@ -1915,10 +1302,13 @@ function hopOverforPlayer2(oldId,oldcellnumber,pieceId,cellNumber)
 
 function hopOverforPlayer1(oldId,oldcellnumber,pieceId,cellNumber)
     {
-        
+       
+      
+    
         let cellvalue = parseInt(cellNumber.replace(/\D/g, ""), 10);
         if(isKing[oldId]==false)
         {
+            
         
     
         if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
@@ -1992,6 +1382,7 @@ function hopOverforPlayer1(oldId,oldcellnumber,pieceId,cellNumber)
         }
         else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+22&&player1==true && friendlyRight==false)
         {
+            alert('insidesss');
            
             blackPiecePostions[oldId]+=22;
             //clear the O from the first spot
@@ -2633,6 +2024,7 @@ function checkforfriendlyPiece(pieceId)
         {
             
             friendlyRight=true;
+            alert('friendly');
         
          } 
         }
@@ -2684,6 +2076,7 @@ function checkforfriendlyPiece(pieceId)
             {
                 
                friendlyLeft=true;
+              
             } 
         }  
     }
@@ -2724,3 +2117,620 @@ function checkforfriendlyPiece(pieceId)
 
 }
 
+/*
+function hopOver(oldId,oldcellnumber,pieceId,cellNumber)
+{
+    alert('inside here');
+    let cellvalue = parseInt(cellNumber.replace(/\D/g, ""), 10);
+
+   
+    if(isKing[oldId]==false)
+    {
+
+    if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
+    {
+        blackPiecePostions[oldId]+=9;
+        //clear the O from the first spot
+        document.getElementById(oldId).innerHTML='';
+    //input O into the second spot we put
+        document.getElementById(cellNumber).innerHTML='O';
+        replace(oldId,oldcellnumber,pieceId,cellNumber);
+        updategameBoard(oldId,oldcellnumber,+9);
+        player1=false;
+        player2=true;
+        clickedPiece=false;
+        noEnemy=true;
+        if(isKing[oldId]==false)
+        {
+        makeKing(oldId);
+        }
+    
+    }
+    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+11&&player1==true)
+    {
+        blackPiecePostions[oldId]+=11;
+        //clear the O from the first spot
+        document.getElementById(oldId).innerHTML='';
+    //input O into the second spot we put
+        document.getElementById(cellNumber).innerHTML='O';
+    //document.getElementById(cellNumber).style.color = '';
+    //switch the two Id's
+        replace(oldId,oldcellnumber,pieceId,cellNumber);
+        updategameBoard(oldId,oldcellnumber,+11);
+        player1=false;
+        player2=true;
+        clickedPiece=false;
+        noEnemy=true;
+        if(isKing[oldId]==false)
+        {
+        makeKing(oldId);
+        }
+        
+
+    }
+    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+18&&player1==true)
+    { 
+            blackPiecePostions[oldId]+=18;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='O';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+        eleminatePc(storenemypieceId,0,storenemypiececell);
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,+18);
+            player1=false;
+            player2=true;
+            clickedPiece=false;
+            noEnemy=true;
+            player2points--;
+            updateScore();
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+            
+
+        
+    }
+    else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+22&&player1==true)
+    {
+        blackPiecePostions[oldId]+=22;
+        //clear the O from the first spot
+        document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+        document.getElementById(cellNumber).innerHTML='O';
+        //cell.style.color='';
+        //document.getElementById(oldId).style.color = '';
+        //switch the two Id's
+        eleminatePc(storenemypieceId,1,storenemypiececell);
+        replace(oldId,oldcellnumber,pieceId,cellNumber);
+        updategameBoard(oldId,oldcellnumber,+22);
+        player2points--;    
+        updateScore();  
+        noEnemy=true;
+        player1=false;
+       player2=true;
+     clickedPiece=false;
+     if(isKing[oldId]==false)
+        {
+         makeKing(oldId);
+         }
+
+
+    
+    }
+    //for player 2 statements
+    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-9&&player2==true)
+    {
+    
+        redPiecePositions[oldId]-=9;
+        //clear the O from the first spot
+        document.getElementById(oldId).innerHTML='';
+    //input O into the second spot we put
+        document.getElementById(cellNumber).innerHTML='X';
+    //document.getElementById(cellNumber).style.color = '';
+    //switch the two Id's
+        replace(oldId,oldcellnumber,pieceId,cellNumber);
+        updategameBoard(oldId,oldcellnumber,-9);
+        player1=true;
+        player2=false;
+        clickedPiece=false;
+        noEnemy=true;
+        if(isKing[oldId]==false)
+        {
+        makeKing(oldId);
+        }
+
+    } 
+    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-11&&player2==true)
+    {
+        redPiecePositions[oldId]-=11;
+        //clear the O from the first spot
+        document.getElementById(oldId).innerHTML='';
+    //input O into the second spot we put
+        document.getElementById(cellNumber).innerHTML='X';
+    //document.getElementById(cellNumber).style.color = '';
+    //switch the two Id's
+        replace(oldId,oldcellnumber,pieceId,cellNumber);
+        updategameBoard(oldId,oldcellnumber,-11);
+        player1=true;
+        player2=false;
+        clickedPiece=false;
+        noEnemy=true;
+        if(isKing[oldId]==false)
+        {
+        makeKing(oldId);
+        }
+
+    }
+    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-18&&player2==true)
+    {
+        redPiecePositions[oldId]-=18;
+        //clear the O from the first spot
+        document.getElementById(oldId).innerHTML='';
+    //input O into the second spot we put
+        document.getElementById(cellNumber).innerHTML='X';
+    //document.getElementById(cellNumber).style.color = '';
+    //switch the two Id's
+
+    eleminatePc(storenemypieceId,4,storenemypiececell);
+    replace(oldId,oldcellnumber,pieceId,cellNumber);
+    updategameBoard(oldId,oldcellnumber,-18);
+    player1points--;
+    updateScore();
+    player1=true;
+    player2=false;
+    clickedPiece=false;
+    noEnemy=true;
+        if(isKing[oldId]==false)
+        {
+        makeKing(oldId);
+        }
+
+    }
+    else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-22&&player2==true)
+    {
+        
+        
+
+        redPiecePositions[oldId]-=22;
+        //clear the O from the first spot
+        document.getElementById(oldId).innerHTML='';
+    //input O into the second spot we put
+        document.getElementById(cellNumber).innerHTML='X';
+    //document.getElementById(cellNumber).style.color = '';
+    //switch the two Id's
+
+
+    eleminatePc(storenemypieceId,5,storenemypiececell);
+    player1points--;
+    updateScore();
+        replace(oldId,oldcellnumber,pieceId,cellNumber);
+        updategameBoard(oldId,oldcellnumber,-22);
+        
+        player1=true;
+        player2=false;
+        clickedPiece=false;
+        noEnemy=true;
+        
+        if(isKing[oldId]==false)
+        {
+        makeKing(oldId);
+        }
+
+    }  
+   
+   
+}
+   
+
+   
+   
+   
+   
+     if (isKing[oldId]==true)
+    {
+        if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+9&&player1==true)
+        {
+            blackPiecePostions[oldId]+=9;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+           eleminatePc(storenemypieceId,0,storenemypiececell);
+            document.getElementById(cellNumber).innerHTML='O';
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,+9);
+            player1=false;
+            player2=true;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+        
+        }
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+11&&player1==true)
+        {
+            blackPiecePostions[oldId]+=11;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='O';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+        eleminatePc(storenemypieceId,1,storenemypiececell);
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,+11);
+            player1=false;
+            player2=true;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+            
+    
+        }
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-9&&player1==true)
+        {
+            blackPiecePostions[oldId]-=9;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='O';
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,-9);
+            player1=false;
+            player2=true;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+        
+        }
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-11&&player1==true)
+        {
+            blackPiecePostions[oldId]-=11;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='O';
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,-11);
+            player1=false;
+            player2=true;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+        
+        }
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+18&&player1==true)
+        { 
+                blackPiecePostions[oldId]+=18;
+                //clear the O from the first spot
+                document.getElementById(oldId).innerHTML='';
+            //input O into the second spot we put
+                document.getElementById(cellNumber).innerHTML='O';
+            //document.getElementById(cellNumber).style.color = '';
+            //switch the two Id's
+            eleminatePc(storenemypieceId,0,storenemypiececell);
+                replace(oldId,oldcellnumber,pieceId,cellNumber);
+                updategameBoard(oldId,oldcellnumber,+18);
+                player1=false;
+                player2=true;
+                clickedPiece=false;
+                noEnemy=true;
+                player2points--;
+                updateScore();
+                if(isKing[oldId]==false)
+                {
+                makeKing(oldId);
+                }
+                
+    
+            
+        }
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]+22&&player1==true)
+        {
+            blackPiecePostions[oldId]+=22;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+            //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='O';
+            //cell.style.color='';
+            //document.getElementById(oldId).style.color = '';
+            //switch the two Id's
+            eleminatePc(storenemypieceId,1,storenemypiececell);
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,+22);
+            player2points--;    
+            updateScore();  
+            noEnemy=true;
+            player1=false;
+           player2=true;
+         clickedPiece=false;
+         if(isKing[oldId]==false)
+            {
+             makeKing(oldId);
+             }
+    
+    
+        
+        }
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-18&&player1==true)
+        { 
+                blackPiecePostions[oldId]-=18;
+                //clear the O from the first spot
+                document.getElementById(oldId).innerHTML='';
+            //input O into the second spot we put
+                document.getElementById(cellNumber).innerHTML='O';
+            //document.getElementById(cellNumber).style.color = '';
+            //switch the two Id's
+            eleminatePc(storenemypieceId,2,storenemypiececell);
+                replace(oldId,oldcellnumber,pieceId,cellNumber);
+                updategameBoard(oldId,oldcellnumber,-18);
+                player1=false;
+                player2=true;
+                clickedPiece=false;
+                noEnemy=true;
+                player2points--;
+                updateScore();
+                if(isKing[oldId]==false)
+                {
+                makeKing(oldId);
+                }
+                
+    
+            
+        }
+        else if(gameBoardspots[cellvalue]==blackPiecePostions[oldId]-22&&player1==true)
+        {
+            blackPiecePostions[oldId]-=22;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+            //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='O';
+            //cell.style.color='';
+            //document.getElementById(oldId).style.color = '';
+            //switch the two Id's
+            eleminatePc(storenemypieceId,3,storenemypiececell);
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,-22);
+            player2points--;    
+            updateScore();  
+            noEnemy=true;
+            player1=false;
+           player2=true;
+         clickedPiece=false;
+         if(isKing[oldId]==false)
+            {
+             makeKing(oldId);
+             }
+    
+    
+        
+        }
+        //for player 2 statements
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-9&&player2==true)
+        {
+            
+            redPiecePositions[oldId]-=9;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='X';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,-9);
+            player1=true;
+            player2=false;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+    
+        } 
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-11&&player2==true)
+        {
+            redPiecePositions[oldId]-=11;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='X';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,-11);
+            player1=true;
+            player2=false;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+    
+        }
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-18&&player2==true)
+        {
+            redPiecePositions[oldId]-=18;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='X';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+    
+        eleminatePc(storenemypieceId,4,storenemypiececell);
+        replace(oldId,oldcellnumber,pieceId,cellNumber);
+        updategameBoard(oldId,oldcellnumber,-18);
+        player1points--;
+        updateScore();
+        player1=true;
+        player2=false;
+        clickedPiece=false;
+        noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+    
+        }
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]-22&&player2==true)
+        {
+            
+            
+    
+            redPiecePositions[oldId]-=22;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='X';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+    
+    
+        eleminatePc(storenemypieceId,5,storenemypiececell);
+        player1points--;
+        updateScore();
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,-22);
+            
+            player1=true;
+            player2=false;
+            clickedPiece=false;
+            noEnemy=true;
+            
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+        }//checking positive sides
+
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+9&&player2==true)
+        {
+            
+            redPiecePositions[oldId]+=9;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='X';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,+9);
+            player1=true;
+            player2=false;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+    
+        } 
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+11&&player2==true)
+        {
+            redPiecePositions[oldId]+=11;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='X';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,+11);
+            player1=true;
+            player2=false;
+            clickedPiece=false;
+            noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+    
+        }
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+18&&player2==true)
+        {
+            redPiecePositions[oldId]+=18;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='X';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+    
+        eleminatePc(storenemypieceId,6,storenemypiececell);
+        replace(oldId,oldcellnumber,pieceId,cellNumber);
+        updategameBoard(oldId,oldcellnumber,+18);
+        player1points--;
+        updateScore();
+        player1=true;
+        player2=false;
+        clickedPiece=false;
+        noEnemy=true;
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+    
+        }
+        else if(gameBoardspots[cellvalue]==redPiecePositions[oldId]+22&&player2==true)
+        {
+            
+            
+    
+            redPiecePositions[oldId]+=22;
+            //clear the O from the first spot
+            document.getElementById(oldId).innerHTML='';
+        //input O into the second spot we put
+            document.getElementById(cellNumber).innerHTML='X';
+        //document.getElementById(cellNumber).style.color = '';
+        //switch the two Id's
+    
+    
+        eleminatePc(storenemypieceId,7,storenemypiececell);
+        player1points--;
+        updateScore();
+            replace(oldId,oldcellnumber,pieceId,cellNumber);
+            updategameBoard(oldId,oldcellnumber,+22);
+            
+            player1=true;
+            player2=false;
+            clickedPiece=false;
+            noEnemy=true;
+            
+            if(isKing[oldId]==false)
+            {
+            makeKing(oldId);
+            }
+        }
+        
+
+    }
+
+
+    //reset left and right to false
+    enemyLeft=false;
+    enemyRight=false;
+
+    identifyTurn();
+
+
+
+    
+}
+    
+ */

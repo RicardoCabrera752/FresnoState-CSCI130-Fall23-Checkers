@@ -34,21 +34,21 @@ table{
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background-color: white; /* we can remove this if we have the player choose a color*/
+    background-color: white; 
   
   }
   /*
   #pc0.clicked::after,#pc1.clicked::after,#pc2.clicked::after,#pc3.clicked::after,#pc4.clicked::after,#pc5.clicked::after,#pc6.clicked::after,
   #pc7.clicked::after,#pc8.clicked::after,#pc9.clicked::after,#pc10.clicked::after,#pc11.clicked::after
   {
-    background-color: blue; /* identify when our piece has been clicked
+    background-color: blue; 
   }
 
 
   #pc12.clicked::after,#pc13.clicked::after,#pc14.clicked::after,#pc15.clicked::after,#pc16.clicked::after, #pc17.clicked::after,
 #pc18.clicked::after,#pc19.clicked::after,#pc20.clicked::after,#pc21.clicked::after,#pc22.clicked::after,#pc23.clicked::after
 {
-  background-color: purple; /* identify when our piece has been clicked
+  background-color: purple; 
 }
 */
   #pc0.king::after,#pc1.king::after,#pc2.king::after,#pc3.king::after,#pc4.king::after,#pc5.king::after, 
