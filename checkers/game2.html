@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <DOCTYPE html>
+        <html>
+            <head>
+                <link  rel="stylesheet" href="style2.css">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            </head>
+            
+            
+            <button id="start" onclick="Start()">StartGame</button>
+            <button id="reset" onclick="Reset()"> Reset Game</button>
+            <div id="winningStatus"></div>
+            <table>
+                <tr>
+                    <td class="Red"></td> 
+                    <td class="black" id="pc0" onclick="clickPiece('pc0','cell1')">O</td> 
+                    <td class="Red"></td>
+                    <td class="black" id="pc1" onclick="clickPiece('pc1','cell3')">O</td> 
+                    <td class="Red"></td> 
+
+                    <td class="black" id="pc2" onclick="clickPiece('pc2','cell5')">O</td> 
+                    <td class="Red"></td> 
+                    <td class="black" id="pc3" onclick="clickPiece('pc3','cell7')">O</td> 
+                    <td class="Red"></td>
+                    <td class="black" id="pc4" onclick="clickPiece('pc4','cell9')">O</td>        
+        
+                </tr>
+                <tr>
+                    <td class="black" id="pc5" onclick="clickPiece('pc5','cell10')">O</td> 
+                    <td class="Red"></td>
+                    <td class="black" id="pc6" onclick="clickPiece('pc6','cell12')">O</td> 
+                    <td class="Red"></td> 
+                     <td class="black" id="pc7" onclick="clickPiece('pc7','cell14')">O</td>
+                     <td class="Red"></td> 
+                    <td class="black" id="pc8" onclick="clickPiece('pc8','cell16')">O</td> 
+                    <td class="Red"></td> 
+                    <td class="black" id="pc9" onclick="clickPiece('pc9','cell18')">O</td>
+                    <td class="Red"></td>
+                </tr>
+                <tr>
+                    <td class="Red"></td> 
+                    <td class="black" id="pc10" onclick="clickPiece('pc10','cell21')">O</td> 
+                    <td class="Red"></td> 
+                    <td class="black" id="pc11" onclick="clickPiece('pc11','cell23')">O</td> 
+                    <td class="Red"></td> 
+
+                    <td class="black" id="pc12" onclick="clickPiece('pc12','cell25')">O</td>  
+                    <td class="Red"></td> 
+                    <td class="black" id="pc13" onclick="clickPiece('pc13','cell27')">O</td> 
+                    <td class="Red"></td> 
+                    <td class="black" id="pc14" onclick="clickPiece('pc14','cell29')">O</td> 
+                </tr>
+                
+                <tr>
+                    <td class="black" id="cell30" onclick="clickPiece('None','cell30')"></td> 
+                    <td class="Red"></td> 
+                    <td class="black" id="cell32" onclick="clickPiece('None','cell32')"></td>  
+                    <td class="Red"></td>
+                    <td class="black" id="cell34" onclick="clickPiece('None','cell34')"></td>  
+                    <td class="Red"></td>
+                     <td class="black" id="cell36" onclick="clickPiece('None','cell36')"></td>  
+                     <td class="Red"></td>
+                     <td class="black" id="cell38" onclick="clickPiece('None','cell38')"></td> 
+                    <td class="Red"></td> 
+                </tr>
+        
+                <tr>
+                    <td class="Red"></td>
+                     <td class="black" id="cell41" onclick="clickPiece('None','cell41')"></td>  
+                     <td class="Red"></td> 
+                     <td class="black" id="cell43" onclick="clickPiece('None','cell43')"></td> 
+                    <td class="Red"></td>
+                     <td class="black" id="cell45" onclick="clickPiece('None','cell45')"></td>  
+                     <td class="Red"></td>
+                      <td class="black" id="cell47" onclick="clickPiece('None','cell47')"></td> 
+                      <td class="Red"></td>
+                      <td class="black" id="cell49" onclick="clickPiece('None','cell49')"></td> 
+
+                </tr>
+                <!-- Red piece-->
+                <tr>
+                    <td class="black" id="cell50" onclick="clickPiece('None','cell50')"></td> 
+                     <td class="Red"></td> 
+                     <td class="black" id="cell52" onclick="clickPiece('None','cell52')"></td> 
+                      <td class="Red"></td>
+                      <td class="black" id="cell54" onclick="clickPiece('None','cell54')"></td> 
+                    
+                      <td class="Red"></td>
+                      <td class="black" id="cell56" onclick="clickPiece('None','cell56')"></td>  
+                      <td class="Red"></td>
+                      <td class="black" id="cell58" onclick="clickPiece('None','cell58')"></td> 
+                      <td class="Red"></td>
+                    </tr>
+                
+                <tr>
+                    <td class="Red"></td> 
+                    <td class="black" id="cell61" onclick="clickPiece('None','cell61')"></td>  
+                    <td class="Red"></td>
+                     <td class="black" id="cell63" onclick="clickPiece('None','cell63')"></td> 
+                    <td class="Red"></td>
+                     <td class="black" id="cell65" onclick="clickPiece('None','cell65')"></td> 
+                      <td class="Red"></td> 
+                      <td class="black" id="cell67" onclick="clickPiece('None','cell67')"></td> 
+                      <td class="Red"></td> 
+                      <td class="black" id="cell69" onclick="clickPiece('None','cell69')"></td> 
+                </tr>
+                <tr>
+                    <td class="black" id="pc15" onclick="clickPiece('pc15','cell70')">X</td>  
+                    <td class="Red"></td>
+                     <td class="black" id="pc16" onclick="clickPiece('pc16','cell72')">X</td> 
+                      <td class="Red"></td>
+                    <td class="black" id="pc17" onclick="clickPiece('pc17','cell74')">X</td> 
+                     <td class="Red"></td> 
+                     <td class="black" id="pc18" onclick="clickPiece('pc18','cell76')">X</td> 
+                      <td class="Red"></td>
+                      <td class="black" id="pc19" onclick="clickPiece('pc19','cell78')">X</td> 
+                      <td class="Red"></td>
+                 </tr>
+                 <tr>
+                    <td class="Red"></td> 
+                    <td class="black" id="pc20" onclick="clickPiece('pc20','cell81')">X</td>  
+                    <td class="Red"></td>
+                     <td class="black" id="pc21" onclick="clickPiece('pc21','cell83')">X</td> 
+                    <td class="Red"></td>
+                     <td class="black" id="pc22" onclick="clickPiece('pc22','cell85')">X</td> 
+                      <td class="Red"></td> 
+                      <td class="black" id="pc23" onclick="clickPiece('pc23','cell87')">X</td> 
+                      <td class="Red"></td> 
+                      <td class="black" id="pc24" onclick="clickPiece('pc24','cell89')">X</td> 
+                </tr>
+                <tr>
+                    <td class="black" id="pc25" onclick="clickPiece('pc25','cell90')">X</td>  
+                    <td class="Red"></td>
+                     <td class="black" id="pc26" onclick="clickPiece('pc26','cell92')">X</td> 
+                      <td class="Red"></td>
+                    <td class="black" id="pc27" onclick="clickPiece('pc27','cell94')">X</td> 
+                     <td class="Red"></td> 
+                     <td class="black" id="pc28" onclick="clickPiece('pc28','cell96')">X</td> 
+                      <td class="Red"></td>
+                      <td class="black" id="pc29" onclick="clickPiece('pc29','cell98')">X</td> 
+                      <td class="Red"></td>
+                 </tr>
+            </table>
+               
+        <script src="logicGame2.js"></script>
+        <div id="Score">
+        <div id="P1Score"></div>
+        <div id="P2Score"></div>
+        
+            
+        </html>
+    
+    
+    
+</html>

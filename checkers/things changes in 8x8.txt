@@ -1,0 +1,5 @@
+things changes in 8x8
+    - let color=document.getElementById(pieceId);
+    color.classList.toggle('clicked'); 
+    added at the end of hop over 
+    - changed if to else if on hopover for isKing==true
