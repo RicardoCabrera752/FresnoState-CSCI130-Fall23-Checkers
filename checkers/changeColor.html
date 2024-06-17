@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checker Color Chooser</title>
+    <link rel="stylesheet" href="style.css" id="customStylesheet">
+</head>
+<body>
+
+    <h1>Checker Color Chooser</h1>
+
+    <label for="checkerColor">Choose Checker Color:</label>
+    <select id="checkerColor" onchange="changeCheckerColor()">
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+    </select>
+    <button onclick="GoHome()">Go back to Main Page</button>
+
+    <script>
+        function GoHome() {
+            location.href = "index.html";
+        }
+
+        function changeCheckerColor() {
+            var selectedColor = document.getElementById("checkerColor").value;
+
+            // Create a new style element
+            var styleElement = document.createElement('style');
+            styleElement.type = 'text/css';
+
+            // Add your CSS rules
+            styleElement.textContent = `
+                .Red {
+                    background-color: ${selectedColor};
+                }
+                .black {
+                    background-color: ${selectedColor === 'green' ? 'black' : 'black'};
+                    color: ${selectedColor === 'green' ? 'white' : 'blue'};
+                }
+                #pc0.clicked::after, #pc1.clicked::after, #pc2.clicked::after {
+                    background-color: ${selectedColor === 'green' ? 'blue' : 'yellow'};
+                }
+                #pc0.king::after, #pc1.king::after, #pc2.king::after {
+                    background-color: ${selectedColor === 'green' ? 'orange' : 'orange'};
+                }
+            `;
+
+            // Replace the existing stylesheet with the modified one
+            document.getElementById('customStylesheet').replaceWith(styleElement);
+        }
+    </script>
+
+</body>
+</html>
