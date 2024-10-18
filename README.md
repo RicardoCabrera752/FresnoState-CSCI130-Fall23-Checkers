@@ -54,4 +54,4 @@ How to run the program:
 
 10) Whenever you want to play BattleCheckers again you just open the login.html page with localhost again
 
-   - There is no need to run the initDB.php script again
+    - There is no need to run the initDB.php script again
